@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">DogsAdoptionApp</string>
+    <string name="app_header">Dog Adoption</string>
+    <string name="add_dog">Add Dog</string>
+    <string name="delete_dog">Delete Dog</string>
+    <string name="edit_dog">Edit Dog</string>
+
+    <string name="dog_name">Dog Name</string>
+    <string name="dog_age">Dog Age</string>
+    <string name="dog_breed">Breed</string>
+    <string name="select_image">Select Image</string>
+    <string name="save_dog">Save Dog</string>
+    <string name="fill_all_fields">Please fill all fields</string>
+
+    <string name="adoption_process">Adoption Process</string>
+    <string name="adoption_success">Dog adopted successfully!</string>
+    <string name="years_old_format">%1$d years old</string>
+
+    <string name="your_favorites">Your Favorite Dogs</string>
+    <string name="dog_deleted">Dog removed</string>
+
+    <string name="tab_all_dogs">All</string>
+    <string name="tab_favorites">Favorites</string>
+    <string name="tab_history">History</string>
+
+    <string name="history_title">Adoption History</string>
+    <string name="adopter">Adopter</string>
+    <string name="adopter_format">Adopter: %1$s %2$s</string>
+    <string name="date">Date</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="city">City</string>
+    <string name="terms">I agree to all terms</string>
+    <string name="adopt">Adopt</string>
+
+</resources>

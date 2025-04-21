@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">DogsAdoptionApp</string>
+    <string name="app_header">אימוץ כלבים</string>
+    <string name="add_dog">הוסף כלב</string>
+    <string name="delete_dog">מחק כלב</string>
+    <string name="edit_dog">ערוך כלב</string>
+
+    <string name="dog_name">שם הכלב</string>
+    <string name="dog_age">גיל הכלב</string>
+    <string name="dog_breed">גזע</string>
+    <string name="select_image">בחר תמונה</string>
+    <string name="save_dog">שמור כלב</string>
+    <string name="fill_all_fields">נא למלא את כל השדות</string>
+
+    <string name="adoption_process">לתהליך האימוץ</string>
+    <string name="adoption_success">הכלב אומץ בהצלחה!</string>
+    <string name="years_old_format">%1$d שנים</string>
+
+    <string name="your_favorites">הכלבים המועדפים עליך</string>
+    <string name="dog_deleted">כלב הוסר</string>
+
+    <string name="tab_all_dogs">כל הכלבים</string>
+    <string name="tab_favorites">מועדפים</string>
+    <string name="tab_history">היסטוריה</string>
+
+    <string name="history_title">היסטוריית אימוצים</string>
+    <string name="adopter">מאמץ</string>
+    <string name="adopter_format">מאמץ: %1$s %2$s</string>
+    <string name="date">תאריך</string>
+
+    <string name="first_name">שם פרטי</string>
+    <string name="last_name">שם משפחה</string>
+    <string name="city">עיר</string>
+    <string name="terms">אני מסכים לכל התנאים</string>
+    <string name="adopt">אמץ</string>
+
+</resources>
