@@ -15,16 +15,22 @@ import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.core.net.toUri
+import com.example.dogsadoptionapp.databinding.FragmentAdoptionFormBinding
 
 class AdoptionFormFragment : Fragment() {
 
+    private var _binding: FragmentAdoptionFormBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: DogsListViewModel
     private lateinit var adoptionViewModel: AdoptionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_adoption_form, container, false)
+    ): View {
+        _binding = FragmentAdoptionFormBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
@@ -37,13 +43,13 @@ class AdoptionFormFragment : Fragment() {
             return
         }
 
-        val image = view.findViewById<ImageView>(R.id.adoptionDogImage)
-        val dogName = view.findViewById<TextView>(R.id.adoptionDogName)
-        val inputFirst = view.findViewById<EditText>(R.id.inputAdopterFirstName)
-        val inputLast = view.findViewById<EditText>(R.id.inputAdopterLastName)
-        val inputCity = view.findViewById<EditText>(R.id.inputAdopterCity)
-        val checkBox = view.findViewById<CheckBox>(R.id.checkboxAgreement)
-        val btnAdopt = view.findViewById<Button>(R.id.btnAdoptConfirm)
+        val image = binding.adoptionDogImage
+        val dogName = binding.adoptionDogName
+        val inputFirst = binding.inputAdopterFirstName
+        val inputLast = binding.inputAdopterLastName
+        val inputCity = binding.inputAdopterCity
+        val checkBox = binding.checkboxAgreement
+        val btnAdopt = binding.btnAdoptConfirm
 
         viewModel.getDogById(dogId).observe(viewLifecycleOwner) { dog ->
             dog?.let {

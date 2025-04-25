@@ -17,49 +17,49 @@ import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 import androidx.core.net.toUri
+import com.example.dogsadoptionapp.databinding.FragmentDogFormBinding
 
 class DogFormFragment : Fragment() {
 
+    private var _binding: FragmentDogFormBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: DogsListViewModel
-    private lateinit var nameInput: EditText
-    private lateinit var ageInput: EditText
-    private lateinit var breedInput: EditText
-    private lateinit var imagePreview: ImageView
     private var imageUri: Uri? = null
-    private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
-    private val args: DogFormFragmentArgs by navArgs()
+
+    private val imagePickerLauncher : ActivityResultLauncher<Array<String>> =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+            binding.imagePreview.setImageURI(it)
+            if (it != null) {
+                requireActivity().contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            imageUri = it
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_dog_form, container, false)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        imagePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                imageUri = data?.data
-                imagePreview.setImageURI(imageUri)
-            }
-        }
+    ): View {
+        _binding = FragmentDogFormBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
 
-        nameInput = view.findViewById(R.id.inputName)
-        ageInput = view.findViewById(R.id.inputAge)
-        breedInput = view.findViewById(R.id.inputBreed)
-        imagePreview = view.findViewById(R.id.imagePreview)
+        val nameInput = binding.inputName
+        val ageInput = binding.inputAge
+        val breedInput = binding.inputBreed
+        val imagePreview = binding.imagePreview
 
-        val btnPickImage = view.findViewById<Button>(R.id.btnPickImage)
-        val btnSubmit = view.findViewById<Button>(R.id.btnSubmitDog)
+        val btnPickImage = binding.btnPickImage
+        val btnSubmit = binding.btnSubmitDog
 
         btnPickImage.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            imagePickerLauncher.launch(intent)
+            imagePickerLauncher.launch(arrayOf("image/*"))
         }
 
         val dogId = arguments?.getInt("dogId", -1) ?: -1
