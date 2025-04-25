@@ -2,31 +2,31 @@ package com.example.dogsadoptionapp.ui.dogslist
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
-import androidx.navigation.fragment.NavHostFragment
+import com.example.dogsadoptionapp.databinding.FragmentDogsListBinding
 
 class DogsListFragment : Fragment() {
 
+    private var _binding: FragmentDogsListBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: DogsListViewModel
     private lateinit var adapter: DogsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_dogs_list, container, false)
+    ): View {
+        _binding = FragmentDogsListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val recyclerView = view.findViewById<RecyclerView>(R.id.dogsRecyclerView)
-        val addButton = view.findViewById<Button>(R.id.btnAddDog)
-
         adapter = DogsAdapter(
             onItemClick = { dog ->
                 val bundle = Bundle().apply {
@@ -47,15 +47,15 @@ class DogsListFragment : Fragment() {
             }
         )
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+        binding.dogsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.dogsRecyclerView.adapter = adapter
 
         viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
         viewModel.allDogs.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
-        addButton.setOnClickListener {
+        binding.btnAddDog.setOnClickListener {
             NavHostFragment.findNavController(requireParentFragment())
                 .navigate(R.id.dogFormFragment)
         }
@@ -70,5 +70,10 @@ class DogsListFragment : Fragment() {
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

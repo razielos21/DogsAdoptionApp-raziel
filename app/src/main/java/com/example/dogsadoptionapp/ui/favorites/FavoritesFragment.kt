@@ -7,27 +7,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsadoptionapp.R
-import com.example.dogsadoptionapp.data.model.Dog
+import com.example.dogsadoptionapp.databinding.FragmentFavoritesBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsAdapter
-import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 import androidx.navigation.fragment.NavHostFragment
+import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 
 class FavoritesFragment : Fragment() {
 
+    private var _binding: FragmentFavoritesBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: DogsListViewModel
     private lateinit var adapter: DogsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_favorites, container, false)
+    ): View {
+        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.favoritesRecyclerView)
         adapter = DogsAdapter(
             onItemClick = { dog ->
                 val bundle = Bundle().apply {
@@ -49,12 +52,17 @@ class FavoritesFragment : Fragment() {
             }
         )
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+        binding.favoritesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.favoritesRecyclerView.adapter = adapter
 
         viewModel.allDogs.observe(viewLifecycleOwner) { dogs ->
             val favorites = dogs.filter { it.isFavorite && !it.isAdopted }
             adapter.submitList(favorites)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -1,17 +1,13 @@
 package com.example.dogsadoptionapp.ui.dogslist
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
+import com.example.dogsadoptionapp.databinding.ItemDogBinding
 
 class DogsAdapter(
     val onItemClick: (Dog) -> Unit,
@@ -20,9 +16,12 @@ class DogsAdapter(
 ) : ListAdapter<Dog, DogsAdapter.DogViewHolder>(DogDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_dog, parent, false)
-        return DogViewHolder(view)
+        val binding = ItemDogBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return DogViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
@@ -30,21 +29,17 @@ class DogsAdapter(
         holder.bind(dog)
     }
 
-    inner class DogViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val dogName: TextView = view.findViewById(R.id.dogName)
-        private val dogBreed: TextView = view.findViewById(R.id.dogBreed)
-        private val dogImage: ImageView = view.findViewById(R.id.dogImage)
-        private val deleteBtn: ImageButton = view.findViewById(R.id.deleteButton)
-        private val editBtn: ImageButton = view.findViewById(R.id.editButton)
+    inner class DogViewHolder(private val binding: ItemDogBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dog: Dog) {
-            dogName.text = dog.name
-            dogBreed.text = dog.breed
-            Glide.with(itemView.context).load(dog.imageUri).into(dogImage)
+            binding.dogName.text = dog.name
+            binding.dogBreed.text = dog.breed
+            Glide.with(itemView.context).load(dog.imageUri).into(binding.dogImage)
 
-            itemView.setOnClickListener { onItemClick(dog) }
-            deleteBtn.setOnClickListener { onDeleteClick(dog) }
-            editBtn.setOnClickListener { onEditClick(dog) }
+            binding.root.setOnClickListener { onItemClick(dog) }
+            binding.deleteButton.setOnClickListener { onDeleteClick(dog) }
+            binding.editButton.setOnClickListener { onEditClick(dog) }
         }
     }
 }
