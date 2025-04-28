@@ -1,10 +1,14 @@
 <resources>
-    <string name="app_name">DogsAdoptionApp</string>
+    <string name="delete_all">מחק הכל</string>
+    <string name="app_name">אפליקצית אימוץ כלבים</string>
     <string name="app_header">אימוץ כלבים</string>
     <string name="add_dog">הוסף כלב</string>
     <string name="delete_dog">מחק כלב</string>
     <string name="edit_dog">ערוך כלב</string>
 
+    <string name="dog_image">תמונת כלב</string>
+    <string name="favorite_on">♥ מועדפים</string>
+    <string name="favorite_off">♡ מועדפים</string>
     <string name="dog_name">שם הכלב</string>
     <string name="dog_age">גיל הכלב</string>
     <string name="dog_breed">גזע</string>
@@ -16,7 +20,7 @@
     <string name="adoption_success">הכלב אומץ בהצלחה!</string>
     <string name="years_old_format">%1$d שנים</string>
 
-    <string name="your_favorites">הכלבים המועדפים עליך</string>
+    <string name="your_favorites">\★ הכלבים המועדפים עליך</string>
     <string name="dog_deleted">כלב הוסר</string>
 
     <string name="tab_all_dogs">כל הכלבים</string>
@@ -28,10 +32,26 @@
     <string name="adopter_format">מאמץ: %1$s %2$s</string>
     <string name="date">תאריך</string>
 
+    <string name="start_adoption_process">התחל תהליך אימוץ</string>
+    <string name="Adopting">מאמצים:</string>
     <string name="first_name">שם פרטי</string>
     <string name="last_name">שם משפחה</string>
-    <string name="city">עיר</string>
+    <string name="email">מייל</string>
     <string name="terms">אני מסכים לכל התנאים</string>
     <string name="adopt">אמץ</string>
+    <string name="Address">כתובת</string>
+    <string name="phone_number">מספר טלפון</string>
+    <string name="adoption_terms">
+    על ידי הסכמה לתנאים אלה, הנך מתחייב/ת ל:\n\n
+    • לספק לכלב בית בטוח, אוהב וקבוע.\n
+    • לדאוג לטיפול וטרינרי שוטף, כולל חיסונים ובדיקות תקופתיות.\n
+    • לעמוד בכל חוקי ותקנות המקומיים בנוגע לאחזקת בעלי חיים.\n
+    • להימנע משימוש בכלב למטרות בלתי חוקיות או מזיקות.\n
+    • ליצור קשר עם סוכנות האימוץ אם אינך מסוגל/ת להמשיך לטפל בכלב.\n\n
+    לפרטים מלאים, אנא צרו קשר עם סוכנות האימוץ שלנו.
+</string>
+    <string name="agree_to_terms">בבקשה הסכם לתנאי האימוץ</string>
+    <string name="validation_error_title">שדות חסרים או לא תקינים</string>
+
 
 </resources>

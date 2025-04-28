@@ -2,15 +2,15 @@ package com.example.dogsadoptionapp.ui.favorites
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentFavoritesBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsAdapter
 import androidx.navigation.fragment.NavHostFragment
+import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 
 class FavoritesFragment : Fragment() {
@@ -40,8 +40,7 @@ class FavoritesFragment : Fragment() {
                     .navigate(R.id.dogDetailsFragment, bundle)
             },
             onDeleteClick = { dog ->
-                viewModel.deleteDog(dog)
-                Toast.makeText(requireContext(), getString(R.string.dog_deleted), Toast.LENGTH_SHORT).show()
+                showDeleteDialog(dog)
             },
             onEditClick = { dog ->
                 val bundle = Bundle().apply {
@@ -59,6 +58,16 @@ class FavoritesFragment : Fragment() {
             val favorites = dogs.filter { it.isFavorite && !it.isAdopted }
             adapter.submitList(favorites)
         }
+    }
+    private fun showDeleteDialog(dog: Dog) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.delete_dog))
+            .setMessage("Are you sure you want to delete ${dog.name}?")
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                viewModel.deleteDog(dog)
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     override fun onDestroyView() {

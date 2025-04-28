@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -43,27 +44,49 @@ class AdoptionFormFragment : Fragment() {
             return
         }
 
-        val image = binding.adoptionDogImage
         val dogName = binding.adoptionDogName
         val inputFirst = binding.inputAdopterFirstName
         val inputLast = binding.inputAdopterLastName
-        val inputCity = binding.inputAdopterCity
+        val inputAddress = binding.inputAddress
+        val inputPhone = binding.inputAdopterPhone
+        val inputEmail = binding.inputAdopterEmail
         val checkBox = binding.checkboxAgreement
         val btnAdopt = binding.btnAdoptConfirm
+
+        checkBox.isChecked = false
+        checkBox.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Adoption Terms")
+                .setMessage(getString(R.string.adoption_terms))
+                .setPositiveButton("Agree") { _, _ ->
+                    checkBox.isChecked = true
+                }
+                .setNegativeButton("Cancel") { _, _ ->
+                    checkBox.isChecked = false
+                }
+                .setCancelable(false)
+                .show()
+        }
 
         viewModel.getDogById(dogId).observe(viewLifecycleOwner) { dog ->
             dog?.let {
                 dogName.text = it.name
-                Glide.with(this).load(it.imageUri.toUri()).into(image)
 
                 btnAdopt.setOnClickListener {
                     val first = inputFirst.text.toString()
                     val last = inputLast.text.toString()
-                    val city = inputCity.text.toString()
+                    val address = inputAddress.text.toString()
+                    val phone = inputPhone.text.toString()
+                    val email = inputEmail.text.toString()
                     val agreed = checkBox.isChecked
 
-                    if (first.isBlank() || last.isBlank() || city.isBlank() || !agreed) {
+                    if (first.isBlank() || last.isBlank() || address.isBlank() || phone.isBlank() || email.isBlank()) {
                         Toast.makeText(requireContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
+                    if (!agreed) {
+                        Toast.makeText(requireContext(), getString(R.string.agree_to_terms), Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
 
@@ -75,13 +98,11 @@ class AdoptionFormFragment : Fragment() {
                         dogImageUri = dog.imageUri,
                         firstName = first,
                         lastName = last,
-                        city = city,
                         date = date
                     )
 
                     adoptionViewModel.insert(record)
 
-                    // mark dog as adopted
                     val adoptedDog = dog.copy(isAdopted = true)
                     viewModel.updateDog(adoptedDog)
 

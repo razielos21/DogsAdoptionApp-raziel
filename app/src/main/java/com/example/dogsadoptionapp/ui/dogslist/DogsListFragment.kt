@@ -1,5 +1,6 @@
 package com.example.dogsadoptionapp.ui.dogslist
 
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +12,7 @@ import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentDogsListBinding
 
+@Suppress("DEPRECATION")
 class DogsListFragment : Fragment() {
 
     private var _binding: FragmentDogsListBinding? = null
@@ -22,6 +24,8 @@ class DogsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        setHasOptionsMenu(true)
         _binding = FragmentDogsListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -59,6 +63,34 @@ class DogsListFragment : Fragment() {
             NavHostFragment.findNavController(requireParentFragment())
                 .navigate(R.id.dogFormFragment)
         }
+    }
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+
+        val deleteItem = menu.findItem(R.id.action_delete)
+        val icon = deleteItem.icon
+        icon?.let {
+            val insetIcon = InsetDrawable(it, 0, 20, 0, 0) // left, top, right, bottom padding (20dp למעלה)
+            deleteItem.icon = insetIcon
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.action_delete) {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Confirm delete")
+                .setMessage("Are you sure you want to delete all items?")
+                .setPositiveButton("Yes")
+                { _, _ -> viewModel.deleteAllDogs()}.show()
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showDeleteDialog(dog: Dog) {

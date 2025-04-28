@@ -45,7 +45,6 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
@@ -57,7 +56,9 @@ dependencies {
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
     implementation(libs.glide)
-    kapt(libs.glide.compiler)
     implementation(libs.viewpager2)
     implementation(libs.androidx.recyclerview)
+
+    implementation(libs.material)
+
 }

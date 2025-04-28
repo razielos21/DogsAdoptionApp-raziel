@@ -15,4 +15,6 @@ class DogsRepository(private val dogsDao: DogsDao) {
     suspend fun deleteDog(dog: Dog) = dogsDao.deleteDog(dog)
 
     fun getDogById(id: Int): LiveData<Dog> = dogsDao.getDogById(id)
+
+    suspend fun deleteAllDogs() = dogsDao.deleteAllDogs()
 }

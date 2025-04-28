@@ -21,4 +21,8 @@ interface DogsDao {
 
     @Query("SELECT * FROM dogs WHERE id = :id")
     fun getDogById(id: Int): LiveData<Dog>
+
+    @Query("DELETE FROM dogs")
+    suspend fun deleteAllDogs()
+
 }

@@ -35,4 +35,10 @@ class DogsListViewModel(application: Application) : AndroidViewModel(application
     fun getDogById(id: Int): LiveData<Dog> {
         return repository.getDogById(id)
     }
+
+    fun deleteAllDogs() {
+        viewModelScope.launch {
+            repository.deleteAllDogs()
+        }
+    }
 }
