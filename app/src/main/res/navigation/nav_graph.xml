@@ -3,24 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:startDestination="@id/dogsTabsFragment">
 
-
     <fragment
         android:id="@+id/dogsListFragment"
         android:name="com.example.dogsadoptionapp.ui.dogslist.DogsListFragment"
         android:label="Dogs List">
         <action
             android:id="@+id/action_dogsListFragment_to_dogFormFragment"
-            app:destination="@id/dogFormFragment" />
+            app:destination="@id/dogFormFragment"
+            app:enterAnim="@anim/from_right" app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left" app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_dogsListFragment_to_dogDetailsFragment"
-            app:destination="@id/dogDetailsFragment" />
+            app:destination="@id/dogDetailsFragment"
+            app:enterAnim="@anim/from_left" app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right" app:popExitAnim="@anim/to_left"/>
     </fragment>
 
     <fragment
         android:id="@+id/dogFormFragment"
         android:name="com.example.dogsadoptionapp.ui.dogform.DogFormFragment"
         android:label="Add/Edit Dog">
-
         <argument
             android:name="dogId"
             app:argType="integer"
@@ -31,7 +33,6 @@
         android:id="@+id/dogDetailsFragment"
         android:name="com.example.dogsadoptionapp.ui.dogdetails.DogDetailsFragment"
         android:label="Dog Details">
-
         <argument
             android:name="dogId"
             app:argType="integer" />
@@ -41,29 +42,29 @@
         android:id="@+id/favoritesFragment"
         android:name="com.example.dogsadoptionapp.ui.favorites.FavoritesFragment"
         android:label="Favorites">
-
         <action
             android:id="@+id/action_favoritesFragment_to_dogDetailsFragment"
-            app:destination="@id/dogDetailsFragment" />
+            app:destination="@id/dogDetailsFragment"
+            app:enterAnim="@anim/from_right" app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left" app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_favoritesFragment_to_dogFormFragment"
-            app:destination="@id/dogFormFragment" />
+            app:destination="@id/dogFormFragment"
+            app:enterAnim="@anim/from_left" app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right" app:popExitAnim="@anim/to_left"/>
     </fragment>
 
     <fragment
         android:id="@+id/dogsTabsFragment"
         android:name="com.example.dogsadoptionapp.ui.tabhost.DogsTabsFragment"
         android:label="Dogs" />
-
     <fragment
         android:id="@+id/adoptionFormFragment"
         android:name="com.example.dogsadoptionapp.ui.adoption.AdoptionFormFragment"
         android:label="Adoption Form">
-
         <argument
             android:name="dogId"
             app:argType="integer" />
     </fragment>
-
 
 </navigation>

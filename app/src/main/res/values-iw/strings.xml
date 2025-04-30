@@ -5,7 +5,6 @@
     <string name="add_dog">הוסף כלב</string>
     <string name="delete_dog">מחק כלב</string>
     <string name="edit_dog">ערוך כלב</string>
-
     <string name="dog_image">תמונת כלב</string>
     <string name="favorite_on">♥ מועדפים</string>
     <string name="favorite_off">♡ מועדפים</string>
@@ -15,23 +14,18 @@
     <string name="select_image">בחר תמונה</string>
     <string name="save_dog">שמור כלב</string>
     <string name="fill_all_fields">נא למלא את כל השדות</string>
-
     <string name="adoption_process">לתהליך האימוץ</string>
     <string name="adoption_success">הכלב אומץ בהצלחה!</string>
     <string name="years_old_format">%1$d שנים</string>
-
     <string name="your_favorites">\★ הכלבים המועדפים עליך</string>
     <string name="dog_deleted">כלב הוסר</string>
-
     <string name="tab_all_dogs">כל הכלבים</string>
     <string name="tab_favorites">מועדפים</string>
     <string name="tab_history">היסטוריה</string>
-
     <string name="history_title">היסטוריית אימוצים</string>
     <string name="adopter">מאמץ</string>
     <string name="adopter_format">מאמץ: %1$s %2$s</string>
     <string name="date">תאריך</string>
-
     <string name="start_adoption_process">התחל תהליך אימוץ</string>
     <string name="Adopting">מאמצים:</string>
     <string name="first_name">שם פרטי</string>
@@ -51,7 +45,22 @@
     לפרטים מלאים, אנא צרו קשר עם סוכנות האימוץ שלנו.
 </string>
     <string name="agree_to_terms">בבקשה הסכם לתנאי האימוץ</string>
+    <string name="adoption_terms_title">תנאי אימוץ</string>
     <string name="validation_error_title">שדות חסרים או לא תקינים</string>
-
+    <string name="agree">אישור</string>
+    <string name="confirm_exit">אשר יציאה</string>
+    <string name="confirm_exit_info">
+        \n\nבטוח שאתה רוצה לחזור?
+    כל שינויים שלא נשמרו ימחקו.</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="cancel">ביטול</string>
+    <string name="missing_dog_ID">לא נמצא ת\"ז כלב</string>
+    <string name="dog_not_found">כלב לא נמצא</string>
+    <string name="enter_valid_email">בבקשה הכנס כתובת מייל תקינה</string>
+    <string name="enter_valid_phone">בבקשה הכנס מספר טלפון תקין</string>
+    <string name="sure_delete">האם אתה בטוח שאתה רוצה למחוק%1$s?</string>
+    <string name="confirm_delete">אשר מחיקה</string>
+    <string name="sure_delete_all">%1$s?בטוח שאתה רוצה למחוק את כל הפריטים</string>
 
 </resources>

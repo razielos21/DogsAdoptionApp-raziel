@@ -2,6 +2,7 @@ package com.example.dogsadoptionapp.ui.dogform
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.drawable.InsetDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -16,6 +17,7 @@ import androidx.core.net.toUri
 import com.example.dogsadoptionapp.databinding.FragmentDogFormBinding
 
 
+@Suppress("DEPRECATION")
 class DogFormFragment : Fragment() {
 
     private var _binding: FragmentDogFormBinding? = null
@@ -23,15 +25,21 @@ class DogFormFragment : Fragment() {
     private lateinit var viewModel: DogsListViewModel
     private var imageUri: Uri? = null
 
-    private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        uri?.let {
-            binding.imagePreview.setImageURI(it)
-            requireActivity().contentResolver.takePersistableUriPermission(
-                it,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
-            imageUri = it
+    private val imagePickerLauncher =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            uri?.let {
+                binding.imagePreview.setImageURI(it)
+                requireActivity().contentResolver.takePersistableUriPermission(
+                    it,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+                imageUri = it
+            }
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -61,7 +69,6 @@ class DogFormFragment : Fragment() {
         val dogId = arguments?.getInt("dogId", -1) ?: -1
 
         if (dogId != -1) {
-
             viewModel.getDogById(dogId).observe(viewLifecycleOwner) { dog ->
                 dog?.let { existingDog ->
                     nameInput.setText(existingDog.name)
@@ -92,7 +99,7 @@ class DogFormFragment : Fragment() {
             btnSubmit.setOnClickListener {
                 if (validateInputs()) {
                     val newDog = Dog(
-                        id = 0, // Room will auto-generate ID
+                        id = 0,
                         name = nameInput.text.toString().trim(),
                         age = ageInput.text.toString().trim().toInt(),
                         breed = breedInput.text.toString().trim(),
@@ -121,6 +128,38 @@ class DogFormFragment : Fragment() {
             else -> true
         }
     }
+
+
+
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        menu.findItem(R.id.action_delete).isVisible = false
+        menu.findItem(R.id.action_return).isVisible = true
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_return -> {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.confirm_exit)
+                    .setMessage(R.string.confirm_exit_info)
+                    .setPositiveButton(R.string.yes) { _, _ ->
+                        findNavController().navigateUp()
+                    }
+                    .setNegativeButton(R.string.no, null)
+                    .setCancelable(false)
+                    .show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     private fun showValidationError() {
         AlertDialog.Builder(requireContext())

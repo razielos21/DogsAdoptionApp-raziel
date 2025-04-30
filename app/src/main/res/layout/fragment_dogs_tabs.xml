@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Tabs -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/dogsTabLayout"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         app:tabSelectedTextColor="@android:color/black"
         app:tabTextColor="@android:color/darker_gray" />
 
-    <!-- ViewPager2 Content -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/dogsViewPager"
         android:layout_width="match_parent"

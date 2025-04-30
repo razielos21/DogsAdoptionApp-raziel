@@ -79,7 +79,6 @@
             android:text="@string/select_image"
             android:contentDescription="@string/select_image"
             app:icon="@drawable/baseline_add_photo_alternate_24"
-            app:iconTint="@color/black"
             app:iconGravity="textStart"
             app:iconPadding="8dp"
             android:layout_marginTop="8dp"
@@ -99,6 +98,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textAllCaps="false"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

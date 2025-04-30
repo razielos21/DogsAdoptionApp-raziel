@@ -13,11 +13,17 @@ import com.example.dogsadoptionapp.databinding.FragmentDogDetailsBinding
 import androidx.core.net.toUri
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 
+@Suppress("DEPRECATION")
 class DogDetailsFragment : Fragment() {
 
     private var _binding: FragmentDogDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: DogsListViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +34,7 @@ class DogDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
 
         val dogId = arguments?.getInt("dogId") ?: -1
@@ -56,8 +63,27 @@ class DogDetailsFragment : Fragment() {
                 }
             }
         } else {
-            Toast.makeText(requireContext(), "Dog not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.dog_not_found, Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        menu.findItem(R.id.action_delete).isVisible = false
+        menu.findItem(R.id.action_return).isVisible = true
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_return -> {
+                findNavController().navigateUp()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

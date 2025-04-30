@@ -4,21 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:layout_marginTop="16dp">
+    android:paddingTop="15dp"
+    android:background="@color/light_blue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
-
-        <!-- CardView for a modern, elevated container -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/dirty_white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -29,7 +27,6 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- ImageView with rounded corners and better scaling -->
                 <ImageView
                     android:id="@+id/dogDetailImage"
                     android:layout_width="match_parent"
@@ -39,7 +36,6 @@
                     android:contentDescription="@string/dog_image"
                     android:layout_marginBottom="12dp" />
 
-                <!-- TextView with consistent typography and theme support -->
                 <TextView
                     android:id="@+id/dogDetailName"
                     android:layout_width="wrap_content"
@@ -65,7 +61,6 @@
                     android:layout_marginBottom="16dp"
                     android:contentDescription="@string/dog_age" />
 
-                <!-- ToggleButton with modern styling -->
                 <ToggleButton
                     android:id="@+id/toggleFavorite"
                     android:layout_width="wrap_content"
@@ -75,7 +70,6 @@
                     android:layout_marginBottom="16dp"
                     android:contentDescription="@string/tab_favorites" />
 
-                <!-- Button with Material Design styling -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAdoptDog"
                     android:layout_width="match_parent"
@@ -84,11 +78,9 @@
                     app:cornerRadius="8dp"
                     android:padding="12dp"
                     android:textAllCaps="false"
-                    style="@style/Widget.MaterialComponents.Button"
                     android:contentDescription="@string/adopt" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

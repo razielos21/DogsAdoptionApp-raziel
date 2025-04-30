@@ -1,5 +1,6 @@
 package com.example.dogsadoptionapp.ui.dogslist
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.*
@@ -73,10 +74,12 @@ class DogsListFragment : Fragment() {
         val deleteItem = menu.findItem(R.id.action_delete)
         val icon = deleteItem.icon
         icon?.let {
-            val insetIcon = InsetDrawable(it, 0, 20, 0, 0) // left, top, right, bottom padding (20dp למעלה)
+            val insetIcon = InsetDrawable(it, 0, 20, 0, 0)
             deleteItem.icon = insetIcon
         }
 
+        menu.findItem(R.id.action_delete).isVisible = true
+        menu.findItem(R.id.action_return).isVisible = false
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -84,19 +87,20 @@ class DogsListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.action_delete) {
             val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Confirm delete")
-                .setMessage("Are you sure you want to delete all items?")
-                .setPositiveButton("Yes")
+            builder.setTitle(R.string.confirm_delete)
+                .setMessage(R.string.sure_delete_all)
+                .setPositiveButton(R.string.yes)
                 { _, _ -> viewModel.deleteAllDogs()}.show()
 
         }
         return super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("StringFormatInvalid")
     private fun showDeleteDialog(dog: Dog) {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.delete_dog))
-            .setMessage("Are you sure you want to delete ${dog.name}?")
+            .setMessage(getString(R.string.sure_delete_all, dog.name))
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 viewModel.deleteDog(dog)
             }

@@ -15,6 +15,7 @@ class DogsAdapter(
     val onEditClick: (Dog) -> Unit
 ) : ListAdapter<Dog, DogsAdapter.DogViewHolder>(DogDiffCallback()) {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
         val binding = ItemDogBinding.inflate(
             LayoutInflater.from(parent.context),

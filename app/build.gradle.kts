@@ -60,5 +60,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
 
     implementation(libs.material)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
 
 }

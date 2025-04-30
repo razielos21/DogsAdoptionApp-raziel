@@ -1,5 +1,6 @@
 package com.example.dogsadoptionapp.ui.favorites
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
@@ -29,6 +30,7 @@ class FavoritesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
 
         adapter = DogsAdapter(
@@ -59,14 +61,17 @@ class FavoritesFragment : Fragment() {
             adapter.submitList(favorites)
         }
     }
+
+    @SuppressLint("StringFormatInvalid")
     private fun showDeleteDialog(dog: Dog) {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.delete_dog))
-            .setMessage("Are you sure you want to delete ${dog.name}?")
+            .setMessage(getString(R.string.sure_delete, dog.name))
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 viewModel.deleteDog(dog)
             }
             .setNegativeButton(android.R.string.cancel, null)
+            .setCancelable(false)
             .show()
     }
 

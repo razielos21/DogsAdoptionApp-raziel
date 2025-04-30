@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Title: Start Adoption Process -->
         <TextView
             android:id="@+id/titleAdoptionProcess"
             android:layout_width="wrap_content"
@@ -22,7 +21,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Dog Information Section -->
         <TextView
             android:id="@+id/adoptionDogLabel"
             android:layout_width="wrap_content"
@@ -45,7 +43,6 @@
             app:layout_constraintBaseline_toBaselineOf="@id/adoptionDogLabel"
             app:layout_constraintStart_toEndOf="@id/adoptionDogLabel" />
 
-        <!-- First Name Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputAdopterFirstNameLayout"
             android:layout_width="match_parent"
@@ -63,7 +60,6 @@
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Last Name Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputAdopterLastNameLayout"
             android:layout_width="match_parent"
@@ -81,7 +77,6 @@
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Address Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputAddressLayout"
             android:layout_width="match_parent"
@@ -99,7 +94,6 @@
                 android:inputType="textPostalAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Phone Number Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputAdopterPhoneLayout"
             android:layout_width="match_parent"
@@ -117,7 +111,6 @@
                 android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Email Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputAdopterEmailLayout"
             android:layout_width="match_parent"
@@ -145,7 +138,6 @@
             app:layout_constraintTop_toBottomOf="@id/inputAdopterEmailLayout"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Adopt Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAdoptConfirm"
             android:layout_width="match_parent"
