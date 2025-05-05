@@ -13,11 +13,13 @@ class DogsListViewModel(application: Application) : AndroidViewModel(application
 
     private val repository: DogsRepository
     val allDogs: LiveData<List<Dog>>
+    private val dogsCount: Int
 
     init {
         val dao = DogsDatabase.getDatabase(application).dogsDao()
         repository = DogsRepository(dao)
         allDogs = repository.getAllDogs()
+        dogsCount = repository.getAllDogsCount()
     }
 
     fun deleteDog(dog: Dog) = viewModelScope.launch {

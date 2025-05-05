@@ -1,6 +1,5 @@
 <resources>
     <string name="delete_all">מחק הכל</string>
-    <string name="app_name">אפליקצית אימוץ כלבים</string>
     <string name="app_header">אימוץ כלבים</string>
     <string name="add_dog">הוסף כלב</string>
     <string name="delete_dog">מחק כלב</string>
@@ -13,7 +12,7 @@
     <string name="dog_breed">גזע</string>
     <string name="select_image">בחר תמונה</string>
     <string name="save_dog">שמור כלב</string>
-    <string name="fill_all_fields">נא למלא את כל השדות</string>
+    <string name="fill_all_fields">נא למלא את כל השדות.</string>
     <string name="adoption_process">לתהליך האימוץ</string>
     <string name="adoption_success">הכלב אומץ בהצלחה!</string>
     <string name="years_old_format">%1$d שנים</string>
@@ -25,7 +24,6 @@
     <string name="history_title">היסטוריית אימוצים</string>
     <string name="adopter">מאמץ</string>
     <string name="adopter_format">מאמץ: %1$s %2$s</string>
-    <string name="date">תאריך</string>
     <string name="start_adoption_process">התחל תהליך אימוץ</string>
     <string name="Adopting">מאמצים:</string>
     <string name="first_name">שם פרטי</string>
@@ -59,8 +57,10 @@
     <string name="dog_not_found">כלב לא נמצא</string>
     <string name="enter_valid_email">בבקשה הכנס כתובת מייל תקינה</string>
     <string name="enter_valid_phone">בבקשה הכנס מספר טלפון תקין</string>
-    <string name="sure_delete">האם אתה בטוח שאתה רוצה למחוק%1$s?</string>
+    <string name="sure_delete">האם אתה בטוח שאתה רוצה למחוק את %1$s?</string>
     <string name="confirm_delete">אשר מחיקה</string>
-    <string name="sure_delete_all">%1$s?בטוח שאתה רוצה למחוק את כל הפריטים</string>
+    <string name="sure_delete_all">בטוח שאתה רוצה למחוק את כל הכלבים?</string>
+    <string name="alert">התרעה</string>
+    <string name="no_dogs">אין כלבים - אין מה למחוק.</string>
 
 </resources>

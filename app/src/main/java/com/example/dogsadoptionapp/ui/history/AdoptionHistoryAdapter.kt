@@ -23,6 +23,8 @@ class AdoptionHistoryAdapter :
                 record.lastName
             )
             binding.itemAdoptionDate.text = record.date
+            binding.itemAdoptionPhone.text = record.phone
+            binding.itemAdoptionEmail.text = record.email
         }
     }
 

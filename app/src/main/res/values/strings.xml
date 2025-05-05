@@ -1,7 +1,7 @@
 <resources>
 
     <string name="delete_all">Delete All</string>
-    <string name="app_name">DogsAdoptionApp</string>
+    <string name="app_name" translatable="false">BarkBuddy</string>
     <string name="app_header">Dog Adoption</string>
     <string name="add_dog">Add Dog</string>
     <string name="delete_dog">Delete Dog</string>
@@ -14,7 +14,7 @@
     <string name="dog_breed">Breed</string>
     <string name="select_image">Select Image</string>
     <string name="save_dog">Save Dog</string>
-    <string name="fill_all_fields">Please fill all fields</string>
+    <string name="fill_all_fields">Please fill all fields.</string>
     <string name="adoption_process">Adoption Process</string>
     <string name="adoption_success">Dog adopted successfully!</string>
     <string name="years_old_format">%1$d years old</string>
@@ -26,7 +26,6 @@
     <string name="history_title">Adoption History</string>
     <string name="adopter">Adopter</string>
     <string name="adopter_format">Adopter: %1$s %2$s</string>
-    <string name="date">Date</string>
     <string name="start_adoption_process">Start adoption process</string>
     <string name="Adopting">Adopting:</string>
     <string name="first_name">First Name</string>
@@ -57,8 +56,10 @@
     <string name="dog_not_found">Dog not found</string>
     <string name="enter_valid_email">Please enter a valid email address</string>
     <string name="enter_valid_phone">Please enter a valid phone number</string>
-    <string name="sure_delete">Are you sure you want to delete%1$s?</string>
+    <string name="sure_delete">Are you sure you want to delete %1$s?</string>
     <string name="confirm_delete">Confirm delete</string>
-    <string name="sure_delete_all">Are you sure you want to delete all items%1$s?</string>
+    <string name="sure_delete_all">Are you sure you want to delete all dogs?</string>
+    <string name="alert">Alert</string>
+    <string name="no_dogs">No dogs in the list - Nothing to delete.</string>
 
 </resources>

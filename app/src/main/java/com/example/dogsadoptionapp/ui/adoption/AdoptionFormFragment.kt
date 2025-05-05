@@ -28,10 +28,6 @@ class AdoptionFormFragment : Fragment() {
         "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
     )
 
-    private val phonePattern = Pattern.compile(
-        "^(\\+?1[ -]?)?\\(?[2-9][0-9]{2}\\)?[ -]?[0-9]{3}[ -]?[0-9]{4}$"
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -103,7 +99,7 @@ class AdoptionFormFragment : Fragment() {
                         return@setOnClickListener
                     }
 
-                    if (!phonePattern.matcher(phone).matches()) {
+                    if (phone.length != 10) {
                         Toast.makeText(requireContext(), R.string.enter_valid_phone, Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
@@ -113,7 +109,7 @@ class AdoptionFormFragment : Fragment() {
                         return@setOnClickListener
                     }
 
-                    val date = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date())
+                    val date = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(Date())
 
                     val record = AdoptionRecord(
                         dogId = dog.id,
@@ -121,7 +117,9 @@ class AdoptionFormFragment : Fragment() {
                         dogImageUri = dog.imageUri,
                         firstName = first,
                         lastName = last,
-                        date = date
+                        date = date,
+                        phone = phone,
+                        email = email
                     )
 
                     adoptionViewModel.insert(record)

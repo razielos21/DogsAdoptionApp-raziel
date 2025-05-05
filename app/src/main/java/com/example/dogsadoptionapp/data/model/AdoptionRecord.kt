@@ -12,6 +12,8 @@ data class AdoptionRecord(
     val firstName: String = "",
     val lastName: String = "",
     val city: String = "",
-    val date: String = ""
+    val date: String = "",
+    val phone: String = "",
+    val email: String = ""
 )
 
