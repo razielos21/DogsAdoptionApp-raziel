@@ -86,12 +86,20 @@ class DogsListFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.action_delete) {
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle(R.string.confirm_delete)
-                .setMessage(R.string.sure_delete_all)
-                .setPositiveButton(R.string.yes)
-                { _, _ -> viewModel.deleteAllDogs()}.show()
-
+            val dogCount = viewModel.allDogs.value?.size ?: 0
+            if (dogCount == 0) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.alert)
+                    .setMessage(R.string.no_dogs)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show()
+            } else {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.confirm_delete)
+                    .setMessage(R.string.sure_delete_all)
+                    .setPositiveButton(R.string.yes)
+                    { _, _ -> viewModel.deleteAllDogs()}.show()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -100,7 +108,7 @@ class DogsListFragment : Fragment() {
     private fun showDeleteDialog(dog: Dog) {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.delete_dog))
-            .setMessage(getString(R.string.sure_delete_all, dog.name))
+            .setMessage(getString(R.string.sure_delete, dog.name))
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 viewModel.deleteDog(dog)
             }

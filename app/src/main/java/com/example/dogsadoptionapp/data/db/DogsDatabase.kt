@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.data.model.AdoptionRecord
 
-@Database(entities = [Dog::class, AdoptionRecord::class], version = 2, exportSchema = false)
+@Database(entities = [Dog::class, AdoptionRecord::class], version = 1, exportSchema = false)
 abstract class DogsDatabase : RoomDatabase() {
     abstract fun dogsDao(): DogsDao
     abstract fun adoptionRecordDao(): AdoptionRecordDao

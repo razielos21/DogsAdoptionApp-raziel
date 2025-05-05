@@ -6,7 +6,13 @@ import com.example.dogsadoptionapp.data.model.Dog
 
 class DogsRepository( private val dogsDao: DogsDao){
 
+    fun getDogById(id: Int): LiveData<Dog> = dogsDao.getDogById(id)
+
     fun getAllDogs(): LiveData<List<Dog>> = dogsDao.getAllAvailableDogs()
+    
+    fun getAllDogsCount(): Int {
+        return dogsDao.getAllAvailableDogs().value?.size ?: 0
+    }
 
     suspend fun insertDog(dog: Dog){
         dogsDao.insertDog(dog)
@@ -20,8 +26,6 @@ class DogsRepository( private val dogsDao: DogsDao){
         dogsDao.deleteDog(dog)
 
     }
-
-    fun getDogById(id: Int): LiveData<Dog> = dogsDao.getDogById(id)
 
     suspend fun deleteAllDogs(){
         dogsDao.deleteAllDogs()
