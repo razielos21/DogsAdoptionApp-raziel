@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dogsTabsFragment"
+        android:title="@string/menu_home"
+        android:icon="@android:drawable/ic_menu_view" />
+
+    <item
+        android:id="@+id/strayReportsListFragment"
+        android:title="@string/menu_stray_reports"
+        android:icon="@android:drawable/ic_menu_report_image" />
+
+    <item
+        android:id="@+id/donationFragment"
+        android:title="@string/menu_donations"
+        android:icon="@android:drawable/ic_menu_add" />
+
+    <item
+        android:id="@+id/aboutFragment"
+        android:title="@string/menu_about"
+        android:icon="@android:drawable/ic_menu_info_details" />
+
+</menu>
