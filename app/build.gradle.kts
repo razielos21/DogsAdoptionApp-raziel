@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.hilt)
 }
 
 
@@ -55,6 +56,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
+    kapt(libs.glide.compiler)
     implementation(libs.glide)
     implementation(libs.viewpager2)
     implementation(libs.androidx.recyclerview)
@@ -63,4 +65,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
 
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    implementation(libs.gms.location)
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 }

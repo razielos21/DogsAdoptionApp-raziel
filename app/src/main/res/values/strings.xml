@@ -2,6 +2,7 @@
 
     <string name="delete_all">Delete All</string>
     <string name="app_name" translatable="false">BarkBuddy</string>
+    <string name="no_dogs_available">No dogs to display</string>
     <string name="app_header">Dog Adoption</string>
     <string name="add_dog">Add Dog</string>
     <string name="delete_dog">Delete Dog</string>
@@ -45,7 +46,8 @@
     For complete details, contact our adoption agency.</string>
     <string name="agree_to_terms">Please agree to the adoption terms</string>
     <string name="adoption_terms_title">Adoption Terms</string>
-    <string name="validation_error_title">Missing or Invalid Fields</string>
+    <string name="validation_error_title">Validation Error</string>
+    <string name="validation_error_message">Missing or Invalid Fields</string>
     <string name="cancel">Cancel</string>
     <string name="agree">Agree</string>
     <string name="confirm_exit">Confirm Exit</string>
@@ -61,5 +63,30 @@
     <string name="sure_delete_all">Are you sure you want to delete all dogs?</string>
     <string name="alert">Alert</string>
     <string name="no_dogs">No dogs in the list - Nothing to delete.</string>
+    <string name="stray_report_image">Stray dog report image</string>
+    <string name="add_stray_report">Add stray dog report</string>
+    <string name="stray_reports_list">List of stray dog reports</string>
+    <string name="report_description">Report description</string>
+    <string name="report_location">Location</string>
+    <string name="submit_report">Submit report</string>
+    <string name="error_fill_all_fields">Please fill in all fields</string>
+    <string name="report_submitted">Report submitted successfully</string>
+    <string name="navigation_drawer_open">Open menu</string>
+    <string name="navigation_drawer_close">Close menu</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_stray_reports">Stray Reports</string>
+    <string name="add_donation">Add Donation</string>
+    <string name="hint_donor_name">Donor name</string>
+    <string name="choose_category">Choose category:</string>
+    <string name="category_food">Food</string>
+    <string name="category_toys">Toys</string>
+    <string name="category_equipment">Equipment</string>
+    <string name="hint_description">Description (optional)</string>
+    <string name="save">Save</string>
+    <string name="category_format">Category: %1$s</string>
+    <string name="menu_donations">Donations</string>
+    <string name="menu_about">About</string>
+    <string name="all_categories">All</string>
+    <string name="about_text">This app was created for a dog adoption shelter. You can view dogs, adopt, donate items, and help report stray dogs. Built with love by HIT students 🐾</string>
 
 </resources>

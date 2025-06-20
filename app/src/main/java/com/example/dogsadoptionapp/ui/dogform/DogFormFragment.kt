@@ -2,27 +2,29 @@ package com.example.dogsadoptionapp.ui.dogform
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.drawable.InsetDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
-import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
-import androidx.core.net.toUri
 import com.example.dogsadoptionapp.databinding.FragmentDogFormBinding
+import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
-@Suppress("DEPRECATION")
+@AndroidEntryPoint
 class DogFormFragment : Fragment() {
 
     private var _binding: FragmentDogFormBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: DogsListViewModel
+    private val viewModel: DogsListViewModel by viewModels()
     private var imageUri: Uri? = null
 
     private val imagePickerLauncher =
@@ -37,11 +39,6 @@ class DogFormFragment : Fragment() {
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,9 +48,7 @@ class DogFormFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
+        setupMenu()
 
         val nameInput = binding.inputName
         val ageInput = binding.inputAge
@@ -120,53 +115,48 @@ class DogFormFragment : Fragment() {
         val age = binding.inputAge.text.toString().trim()
         val image = imageUri?.toString() ?: ""
 
-        return when {
-            name.isBlank() -> false
-            breed.isBlank() -> false
-            age.isBlank() || age.toIntOrNull() == null || age.toInt() <= 0 -> false
-            image.isBlank() -> false
-            else -> true
-        }
+        return name.isNotBlank()
+                && breed.isNotBlank()
+                && age.toIntOrNull()?.let { it > 0 } == true
+                && image.isNotBlank()
     }
-
-
-
-
-
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-        menu.findItem(R.id.action_delete).isVisible = false
-        menu.findItem(R.id.action_return).isVisible = true
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_return -> {
-                AlertDialog.Builder(requireContext())
-                    .setTitle(R.string.confirm_exit)
-                    .setMessage(R.string.confirm_exit_info)
-                    .setPositiveButton(R.string.yes) { _, _ ->
-                        findNavController().navigateUp()
-                    }
-                    .setNegativeButton(R.string.no, null)
-                    .setCancelable(false)
-                    .show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
 
     private fun showValidationError() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.validation_error_title))
-            .setMessage(getString(R.string.validation_error_title))
+            .setMessage(getString(R.string.validation_error_message))
             .setPositiveButton(android.R.string.ok, null)
             .show()
+    }
+
+    private fun setupMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+                menu.findItem(R.id.action_delete)?.isVisible = false
+                menu.findItem(R.id.action_return)?.isVisible = true
+            }
+
+            override fun onMenuItemSelected(item: MenuItem): Boolean {
+                return when (item.itemId) {
+                    R.id.action_return -> {
+                        AlertDialog.Builder(requireContext())
+                            .setTitle(R.string.confirm_exit)
+                            .setMessage(R.string.confirm_exit_info)
+                            .setPositiveButton(R.string.yes) { _, _ ->
+                                findNavController().navigateUp()
+                            }
+                            .setNegativeButton(R.string.no, null)
+                            .setCancelable(false)
+                            .show()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onDestroyView() {

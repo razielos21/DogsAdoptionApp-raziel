@@ -67,4 +67,55 @@
             app:argType="integer" />
     </fragment>
 
+    <fragment
+        android:id="@+id/strayReportsListFragment"
+        android:name="com.example.dogsadoptionapp.ui.stray.StrayReportsListFragment"
+        android:label="Stray Reports">
+
+        <action
+            android:id="@+id/action_strayReportsListFragment_to_strayDetailsFragment"
+            app:destination="@id/strayDetailsFragment" />
+
+        <action
+            android:id="@+id/action_strayReportsListFragment_to_reportStrayFragment"
+            app:destination="@id/reportStrayFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reportStrayFragment"
+        android:name="com.example.dogsadoptionapp.ui.stray.ReportStrayFragment"
+        android:label="Report Stray" />
+
+    <fragment
+        android:id="@+id/strayDetailsFragment"
+        android:name="com.example.dogsadoptionapp.ui.stray.StrayDetailsFragment"
+        android:label="Stray Details">
+        <argument
+            android:name="reportId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/donationFragment"
+        android:name="com.example.dogsadoptionapp.ui.donations.DonationFragment"
+        android:label="Donations">
+        <action
+            android:id="@+id/action_donationFragment_to_donationFormFragment"
+            app:destination="@id/donationFormFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/donationFormFragment"
+        android:name="com.example.dogsadoptionapp.ui.donations.DonationFormFragment"
+        android:label="Add Donation" />
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.dogsadoptionapp.ui.about.AboutFragment"
+        android:label="About" />
+
 </navigation>

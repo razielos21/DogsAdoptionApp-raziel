@@ -1,26 +1,20 @@
 package com.example.dogsadoptionapp.ui.dogslist
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.dogsadoptionapp.data.db.DogsDatabase
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.data.repository.DogsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DogsListViewModel(application: Application) : AndroidViewModel(application) {
-
+@HiltViewModel
+class DogsListViewModel @Inject constructor(
     private val repository: DogsRepository
-    val allDogs: LiveData<List<Dog>>
-    private val dogsCount: Int
+) : ViewModel() {
 
-    init {
-        val dao = DogsDatabase.getDatabase(application).dogsDao()
-        repository = DogsRepository(dao)
-        allDogs = repository.getAllDogs()
-        dogsCount = repository.getAllDogsCount()
-    }
+    val allDogs: LiveData<List<Dog>> = repository.getAllDogs()
 
     fun deleteDog(dog: Dog) = viewModelScope.launch {
         repository.deleteDog(dog)

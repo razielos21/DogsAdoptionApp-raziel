@@ -1,24 +1,25 @@
 package com.example.dogsadoptionapp.ui.favorites
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.R
+import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentFavoritesBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsAdapter
-import androidx.navigation.fragment.NavHostFragment
-import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: DogsListViewModel
+    private val viewModel: DogsListViewModel by viewModels()
     private lateinit var adapter: DogsAdapter
 
     override fun onCreateView(
@@ -30,31 +31,7 @@ class FavoritesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
-
-        adapter = DogsAdapter(
-            onItemClick = { dog ->
-                val bundle = Bundle().apply {
-                    putInt("dogId", dog.id)
-                }
-                NavHostFragment.findNavController(requireParentFragment())
-                    .navigate(R.id.dogDetailsFragment, bundle)
-            },
-            onDeleteClick = { dog ->
-                showDeleteDialog(dog)
-            },
-            onEditClick = { dog ->
-                val bundle = Bundle().apply {
-                    putInt("dogId", dog.id)
-                }
-                NavHostFragment.findNavController(requireParentFragment())
-                    .navigate(R.id.dogFormFragment, bundle)
-            }
-        )
-
-        binding.favoritesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.favoritesRecyclerView.adapter = adapter
+        setupRecyclerView()
 
         viewModel.allDogs.observe(viewLifecycleOwner) { dogs ->
             val favorites = dogs.filter { it.isFavorite && !it.isAdopted }
@@ -62,7 +39,25 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    @SuppressLint("StringFormatInvalid")
+    private fun setupRecyclerView() {
+        adapter = DogsAdapter(
+            onItemClick = { dog ->
+                val bundle = Bundle().apply { putInt("dogId", dog.id) }
+                NavHostFragment.findNavController(requireParentFragment())
+                    .navigate(R.id.dogDetailsFragment, bundle)
+            },
+            onDeleteClick = { dog -> showDeleteDialog(dog) },
+            onEditClick = { dog ->
+                val bundle = Bundle().apply { putInt("dogId", dog.id) }
+                NavHostFragment.findNavController(requireParentFragment())
+                    .navigate(R.id.dogFormFragment, bundle)
+            }
+        )
+
+        binding.favoritesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.favoritesRecyclerView.adapter = adapter
+    }
+
     private fun showDeleteDialog(dog: Dog) {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.delete_dog))

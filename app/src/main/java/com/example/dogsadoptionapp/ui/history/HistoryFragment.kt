@@ -3,16 +3,18 @@ package com.example.dogsadoptionapp.ui.history
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.databinding.FragmentHistoryBinding
 import com.example.dogsadoptionapp.ui.adoption.AdoptionViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AdoptionViewModel
+    private val viewModel: AdoptionViewModel by viewModels()
     private lateinit var adapter: AdoptionHistoryAdapter
 
     override fun onCreateView(
@@ -24,7 +26,6 @@ class HistoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProvider(this)[AdoptionViewModel::class.java]
         adapter = AdoptionHistoryAdapter()
 
         binding.historyRecyclerView.layoutManager = LinearLayoutManager(requireContext())

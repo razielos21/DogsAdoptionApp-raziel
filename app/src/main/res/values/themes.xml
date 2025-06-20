@@ -1,10 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="Theme.DogsAdoptionApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
         <item name="colorPrimary">@color/blue</item>
         <item name="android:textColor">?attr/editTextColor</item>
         <item name="materialButtonStyle">@style/App.MaterialButton</item>
         <item name="colorOnPrimary">@color/black</item>
-
     </style>
 
     <style name="App.MaterialButton" parent="Widget.MaterialComponents.Button">

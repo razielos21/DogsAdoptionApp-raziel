@@ -1,6 +1,7 @@
 <resources>
     <string name="delete_all">מחק הכל</string>
     <string name="app_header">אימוץ כלבים</string>
+    <string name="no_dogs_available">אין כלבים להצגה</string>
     <string name="add_dog">הוסף כלב</string>
     <string name="delete_dog">מחק כלב</string>
     <string name="edit_dog">ערוך כלב</string>
@@ -44,7 +45,8 @@
 </string>
     <string name="agree_to_terms">בבקשה הסכם לתנאי האימוץ</string>
     <string name="adoption_terms_title">תנאי אימוץ</string>
-    <string name="validation_error_title">שדות חסרים או לא תקינים</string>
+    <string name="validation_error_title">שגיאת אימות</string>
+    <string name="validation_error_message">שדות חסרים או לא תקינים</string>
     <string name="agree">אישור</string>
     <string name="confirm_exit">אשר יציאה</string>
     <string name="confirm_exit_info">
@@ -62,5 +64,30 @@
     <string name="sure_delete_all">בטוח שאתה רוצה למחוק את כל הכלבים?</string>
     <string name="alert">התרעה</string>
     <string name="no_dogs">אין כלבים - אין מה למחוק.</string>
+    <string name="stray_report_image">תמונת דיווח על כלב אבוד</string>
+    <string name="add_stray_report">הוסף דיווח כלב אבוד</string>
+    <string name="stray_reports_list">רשימת דיווחים על כלבים אבודים</string>
+    <string name="report_description">תיאור דיווח</string>
+    <string name="report_location">מיקום</string>
+    <string name="submit_report">הוספת דיווח</string>
+    <string name="error_fill_all_fields">אנא מלא את כל השדות</string>
+    <string name="report_submitted">הדיווח נשלח בהצלחה</string>
+    <string name="navigation_drawer_open">פתח תפריט</string>
+    <string name="navigation_drawer_close">סגור תפריט</string>
+    <string name="menu_home">מסך הבית</string>
+    <string name="menu_stray_reports">רשימת דיווחים</string>
+    <string name="add_donation">הוסף תרומה</string>
+    <string name="hint_donor_name">שם התורם</string>
+    <string name="choose_category">בחר קטגוריה:</string>
+    <string name="category_food">אוכל</string>
+    <string name="category_toys">צעצועים</string>
+    <string name="category_equipment">ציוד</string>
+    <string name="hint_description">תיאור (לא חובה)</string>
+    <string name="save">שמור</string>
+    <string name="category_format">קטגוריה: %1$s</string>
+    <string name="menu_donations">תרומות</string>
+    <string name="menu_about">אודות</string>
+    <string name="all_categories">הכל</string>
+    <string name="about_text">האפליקציה נבנתה עבור עמותת אימוץ כלבים. ניתן לראות כלבים, לאמץ, לתרום ציוד ולעזור בדיווח על כלבים משוטטים. נבנה באהבה ע״י סטודנטים מ־HIT 🐾</string>
 
 </resources>

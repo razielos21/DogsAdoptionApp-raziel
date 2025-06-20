@@ -1,24 +1,20 @@
 package com.example.dogsadoptionapp.ui.adoption
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dogsadoptionapp.data.db.DogsDatabase
+import androidx.lifecycle.LiveData
 import com.example.dogsadoptionapp.data.model.AdoptionRecord
 import com.example.dogsadoptionapp.data.repository.AdoptionRecordRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AdoptionViewModel(application: Application) : AndroidViewModel(application) {
-
+@HiltViewModel
+class AdoptionViewModel @Inject constructor(
     private val repository: AdoptionRecordRepository
-    val allRecords: LiveData<List<AdoptionRecord>>
+) : ViewModel() {
 
-    init {
-        val dao = DogsDatabase.getDatabase(application).adoptionRecordDao()
-        repository = AdoptionRecordRepository(dao)
-        allRecords = repository.getAllRecords()
-    }
+    val allRecords: LiveData<List<AdoptionRecord>> = repository.getAllRecords()
 
     fun insert(record: AdoptionRecord) = viewModelScope.launch {
         repository.insert(record)

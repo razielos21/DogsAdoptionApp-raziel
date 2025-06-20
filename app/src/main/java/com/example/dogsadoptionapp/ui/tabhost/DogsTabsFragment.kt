@@ -2,7 +2,10 @@ package com.example.dogsadoptionapp.ui.tabhost
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentDogsTabsBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,6 +24,11 @@ class DogsTabsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupTabs()
+        setupMenu()
+    }
+
+    private fun setupTabs() {
         val adapter = DogsTabsAdapter(this)
         binding.dogsViewPager.adapter = adapter
 
@@ -32,6 +40,17 @@ class DogsTabsFragment : Fragment() {
                 else -> ""
             }
         }.attach()
+    }
+
+    private fun setupMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.clear()
+            }
+
+            override fun onMenuItemSelected(item: MenuItem): Boolean = false
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onDestroyView() {

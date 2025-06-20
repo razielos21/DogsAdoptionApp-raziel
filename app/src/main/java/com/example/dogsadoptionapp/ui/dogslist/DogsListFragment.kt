@@ -5,48 +5,46 @@ import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentDogsListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-@Suppress("DEPRECATION")
+@AndroidEntryPoint
 class DogsListFragment : Fragment() {
 
     private var _binding: FragmentDogsListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: DogsListViewModel
+    private val viewModel: DogsListViewModel by viewModels()
     private lateinit var adapter: DogsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        setHasOptionsMenu(true)
         _binding = FragmentDogsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupMenu()
+
         adapter = DogsAdapter(
             onItemClick = { dog ->
-                val bundle = Bundle().apply {
-                    putInt("dogId", dog.id)
-                }
+                val bundle = Bundle().apply { putInt("dogId", dog.id) }
                 NavHostFragment.findNavController(requireParentFragment())
                     .navigate(R.id.dogDetailsFragment, bundle)
             },
-            onDeleteClick = { dog ->
-                showDeleteDialog(dog)
-            },
+            onDeleteClick = { dog -> showDeleteDialog(dog) },
             onEditClick = { dog ->
-                val bundle = Bundle().apply {
-                    putInt("dogId", dog.id)
-                }
+                val bundle = Bundle().apply { putInt("dogId", dog.id) }
                 NavHostFragment.findNavController(requireParentFragment())
                     .navigate(R.id.dogFormFragment, bundle)
             }
@@ -55,9 +53,16 @@ class DogsListFragment : Fragment() {
         binding.dogsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.dogsRecyclerView.adapter = adapter
 
-        viewModel = ViewModelProvider(this)[DogsListViewModel::class.java]
-        viewModel.allDogs.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.allDogs.observe(viewLifecycleOwner) { dogList ->
+            adapter.submitList(dogList)
+
+            if (dogList.isEmpty()) {
+                binding.emptyText.visibility = View.VISIBLE
+                binding.dogsRecyclerView.visibility = View.GONE
+            } else {
+                binding.emptyText.visibility = View.GONE
+                binding.dogsRecyclerView.visibility = View.VISIBLE
+            }
         }
 
         binding.btnAddDog.setOnClickListener {
@@ -66,42 +71,50 @@ class DogsListFragment : Fragment() {
         }
     }
 
+    private fun setupMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
 
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
+                menu.findItem(R.id.action_return)?.isVisible = false
 
-        val deleteItem = menu.findItem(R.id.action_delete)
-        val icon = deleteItem.icon
-        icon?.let {
-            val insetIcon = InsetDrawable(it, 0, 20, 0, 0)
-            deleteItem.icon = insetIcon
-        }
+                val deleteItem = menu.findItem(R.id.action_delete)
+                deleteItem?.isVisible = true
 
-        menu.findItem(R.id.action_delete).isVisible = true
-        menu.findItem(R.id.action_return).isVisible = false
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.action_delete) {
-            val dogCount = viewModel.allDogs.value?.size ?: 0
-            if (dogCount == 0) {
-                AlertDialog.Builder(requireContext())
-                    .setTitle(R.string.alert)
-                    .setMessage(R.string.no_dogs)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show()
-            } else {
-                AlertDialog.Builder(requireContext())
-                    .setTitle(R.string.confirm_delete)
-                    .setMessage(R.string.sure_delete_all)
-                    .setPositiveButton(R.string.yes)
-                    { _, _ -> viewModel.deleteAllDogs()}.show()
+                val icon = deleteItem?.icon
+                icon?.let {
+                    val insetIcon = InsetDrawable(it, 0, 20, 0, 0)
+                    deleteItem.icon = insetIcon
+                }
             }
-        }
-        return super.onOptionsItemSelected(item)
+
+            override fun onMenuItemSelected(item: MenuItem): Boolean {
+                return when (item.itemId) {
+                    R.id.action_delete -> {
+                        val dogCount = viewModel.allDogs.value?.size ?: 0
+                        if (dogCount == 0) {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle(R.string.alert)
+                                .setMessage(R.string.no_dogs)
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show()
+                        } else {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle(R.string.confirm_delete)
+                                .setMessage(R.string.sure_delete_all)
+                                .setPositiveButton(R.string.yes) { _, _ ->
+                                    viewModel.deleteAllDogs()
+                                }
+                                .setNegativeButton(android.R.string.cancel, null)
+                                .show()
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     @SuppressLint("StringFormatInvalid")
