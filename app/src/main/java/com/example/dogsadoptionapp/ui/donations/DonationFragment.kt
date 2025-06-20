@@ -19,13 +19,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.DonationCategory
 import com.example.dogsadoptionapp.databinding.FragmentDonationBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DonationFragment : Fragment() {
 
-    private var _binding: FragmentDonationBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDonationBinding by autoCleared()
     private val viewModel: DonationViewModel by viewModels()
     private lateinit var adapter: DonationAdapter
 
@@ -33,7 +33,7 @@ class DonationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDonationBinding.inflate(inflater, container, false)
+        binding = FragmentDonationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -103,8 +103,4 @@ class DonationFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

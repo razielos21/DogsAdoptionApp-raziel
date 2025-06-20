@@ -15,13 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentDogsListBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DogsListFragment : Fragment() {
 
-    private var _binding: FragmentDogsListBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDogsListBinding by autoCleared()
     private val viewModel: DogsListViewModel by viewModels()
     private lateinit var adapter: DogsAdapter
 
@@ -29,7 +29,7 @@ class DogsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDogsListBinding.inflate(inflater, container, false)
+        binding = FragmentDogsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -129,8 +129,4 @@ class DogsListFragment : Fragment() {
             .show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

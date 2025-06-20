@@ -15,6 +15,7 @@ import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.AdoptionRecord
 import com.example.dogsadoptionapp.databinding.FragmentAdoptionFormBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,8 +24,7 @@ import java.util.regex.Pattern
 @AndroidEntryPoint
 class AdoptionFormFragment : Fragment() {
 
-    private var _binding: FragmentAdoptionFormBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentAdoptionFormBinding by autoCleared()
 
     private val dogsViewModel: DogsListViewModel by viewModels()
     private val adoptionViewModel: AdoptionViewModel by viewModels()
@@ -35,7 +35,7 @@ class AdoptionFormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAdoptionFormBinding.inflate(inflater, container, false)
+        binding = FragmentAdoptionFormBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -161,8 +161,4 @@ class AdoptionFormFragment : Fragment() {
         Toast.makeText(requireContext(), getString(messageResId), Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

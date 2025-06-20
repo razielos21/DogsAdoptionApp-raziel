@@ -18,6 +18,7 @@ import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Donation
 import com.example.dogsadoptionapp.data.model.DonationCategory
 import com.example.dogsadoptionapp.databinding.FragmentDonationFormBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -27,15 +28,14 @@ import java.util.Locale
 @AndroidEntryPoint
 class DonationFormFragment : Fragment() {
 
-    private var _binding: FragmentDonationFormBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDonationFormBinding by autoCleared()
     private val viewModel: DonationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDonationFormBinding.inflate(inflater, container, false)
+        binding = FragmentDonationFormBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -85,8 +85,4 @@ class DonationFormFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

@@ -15,13 +15,13 @@ import com.bumptech.glide.Glide
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentDogDetailsBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DogDetailsFragment : Fragment() {
 
-    private var _binding: FragmentDogDetailsBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDogDetailsBinding by autoCleared()
 
     private val viewModel: DogsListViewModel by viewModels()
 
@@ -29,7 +29,7 @@ class DogDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDogDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentDogDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -88,8 +88,4 @@ class DogDetailsFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

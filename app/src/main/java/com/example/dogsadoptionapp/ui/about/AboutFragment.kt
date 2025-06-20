@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentAboutBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 
 class AboutFragment : Fragment() {
 
-    private var _binding: FragmentAboutBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentAboutBinding by autoCleared()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAboutBinding.inflate(inflater, container, false)
+        binding = FragmentAboutBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,8 +26,4 @@ class AboutFragment : Fragment() {
         binding.textAbout.text = getString(R.string.about_text)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

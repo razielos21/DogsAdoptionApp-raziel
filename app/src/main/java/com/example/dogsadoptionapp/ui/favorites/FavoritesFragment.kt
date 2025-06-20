@@ -12,13 +12,13 @@ import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentFavoritesBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsAdapter
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
 
-    private var _binding: FragmentFavoritesBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentFavoritesBinding by autoCleared()
     private val viewModel: DogsListViewModel by viewModels()
     private lateinit var adapter: DogsAdapter
 
@@ -26,7 +26,7 @@ class FavoritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -68,10 +68,5 @@ class FavoritesFragment : Fragment() {
             .setNegativeButton(android.R.string.cancel, null)
             .setCancelable(false)
             .show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

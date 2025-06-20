@@ -8,13 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dogsadoptionapp.databinding.FragmentStrayReportsListBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class StrayReportsListFragment : Fragment() {
 
-    private var _binding: FragmentStrayReportsListBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentStrayReportsListBinding by autoCleared()
 
     private val viewModel: StrayReportViewModel by viewModels()
 
@@ -22,7 +22,7 @@ class StrayReportsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStrayReportsListBinding.inflate(inflater, container, false)
+        binding = FragmentStrayReportsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,8 +44,4 @@ class StrayReportsListFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

@@ -7,13 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.databinding.FragmentHistoryBinding
 import com.example.dogsadoptionapp.ui.adoption.AdoptionViewModel
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
-    private var _binding: FragmentHistoryBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentHistoryBinding by autoCleared()
     private val viewModel: AdoptionViewModel by viewModels()
     private lateinit var adapter: AdoptionHistoryAdapter
 
@@ -21,7 +21,7 @@ class HistoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,10 +34,5 @@ class HistoryFragment : Fragment() {
         viewModel.allRecords.observe(viewLifecycleOwner) { records ->
             adapter.submitList(records)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

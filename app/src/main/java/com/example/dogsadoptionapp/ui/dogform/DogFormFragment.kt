@@ -17,13 +17,13 @@ import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentDogFormBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
+import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DogFormFragment : Fragment() {
 
-    private var _binding: FragmentDogFormBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDogFormBinding by autoCleared()
     private val viewModel: DogsListViewModel by viewModels()
     private var imageUri: Uri? = null
 
@@ -43,7 +43,7 @@ class DogFormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDogFormBinding.inflate(inflater, container, false)
+        binding = FragmentDogFormBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -159,8 +159,4 @@ class DogFormFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

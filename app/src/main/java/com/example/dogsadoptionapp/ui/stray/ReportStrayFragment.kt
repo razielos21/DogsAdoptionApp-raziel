@@ -21,6 +21,7 @@ import androidx.fragment.app.viewModels
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.StrayReport
 import com.example.dogsadoptionapp.databinding.FragmentReportStrayBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,9 +32,7 @@ import java.util.*
 @AndroidEntryPoint
 class ReportStrayFragment : Fragment() {
 
-    private var _binding: FragmentReportStrayBinding? = null
-    private val binding get() = _binding!!
-
+    private var binding: FragmentReportStrayBinding by autoCleared()
     private val viewModel: StrayReportViewModel by viewModels()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -64,7 +63,7 @@ class ReportStrayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentReportStrayBinding.inflate(inflater, container, false)
+        binding = FragmentReportStrayBinding.inflate(inflater, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         return binding.root
     }
@@ -166,10 +165,5 @@ class ReportStrayFragment : Fragment() {
         } else {
             Toast.makeText(context, "Location permission not granted", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

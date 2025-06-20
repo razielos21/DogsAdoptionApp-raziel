@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentStrayDetailsBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -26,8 +27,7 @@ import java.util.*
 @AndroidEntryPoint
 class StrayDetailsFragment : Fragment(), OnMapReadyCallback {
 
-    private var _binding: FragmentStrayDetailsBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentStrayDetailsBinding by autoCleared()
     private val viewModel: StrayReportViewModel by viewModels()
     private val args: StrayDetailsFragmentArgs by navArgs()
 
@@ -38,7 +38,7 @@ class StrayDetailsFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStrayDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentStrayDetailsBinding.inflate(inflater, container, false)
         mapView = binding.detailMap
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync(this)
@@ -112,7 +112,7 @@ class StrayDetailsFragment : Fragment(), OnMapReadyCallback {
     override fun onDestroyView() {
         super.onDestroyView()
         mapView?.onDestroy()
-        _binding = null
+
     }
 
     override fun onLowMemory() {

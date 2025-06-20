@@ -8,18 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentDogsTabsBinding
+import com.example.dogsadoptionapp.utils.autoCleared
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DogsTabsFragment : Fragment() {
 
-    private var _binding: FragmentDogsTabsBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDogsTabsBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDogsTabsBinding.inflate(inflater, container, false)
+        binding = FragmentDogsTabsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,8 +53,4 @@ class DogsTabsFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
