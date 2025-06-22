@@ -61,9 +61,11 @@
     <string name="enter_valid_phone">בבקשה הכנס מספר טלפון תקין</string>
     <string name="sure_delete">האם אתה בטוח שאתה רוצה למחוק את %1$s?</string>
     <string name="confirm_delete">אשר מחיקה</string>
-    <string name="sure_delete_all">בטוח שאתה רוצה למחוק את כל הכלבים?</string>
+    <string name="sure_delete_all">בטוח שאתה רוצה למחוק את הכל?</string>
     <string name="alert">התרעה</string>
     <string name="no_dogs">אין כלבים - אין מה למחוק.</string>
+    <string name="no_donations">אין תרומות למחיקה.</string>
+    <string name="no_stray_reports">אין דיווחים למחיקה.</string>
     <string name="stray_report_image">תמונת דיווח על כלב אבוד</string>
     <string name="add_stray_report">הוסף דיווח כלב אבוד</string>
     <string name="stray_reports_list">רשימת דיווחים על כלבים אבודים</string>
@@ -82,7 +84,7 @@
     <string name="category_food">אוכל</string>
     <string name="category_toys">צעצועים</string>
     <string name="category_equipment">ציוד</string>
-    <string name="hint_description">תיאור (לא חובה)</string>
+    <string name="hint_description">תיאור</string>
     <string name="save">שמור</string>
     <string name="category_format">קטגוריה: %1$s</string>
     <string name="menu_donations">תרומות</string>

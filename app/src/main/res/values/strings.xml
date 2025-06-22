@@ -60,9 +60,11 @@
     <string name="enter_valid_phone">Please enter a valid phone number</string>
     <string name="sure_delete">Are you sure you want to delete %1$s?</string>
     <string name="confirm_delete">Confirm delete</string>
-    <string name="sure_delete_all">Are you sure you want to delete all dogs?</string>
+    <string name="sure_delete_all">Are you sure you want to delete all?</string>
     <string name="alert">Alert</string>
     <string name="no_dogs">No dogs in the list - Nothing to delete.</string>
+    <string name="no_donations">No donations in the list - Nothing to delete.</string>
+    <string name="no_stray_reports">No stray dogs in the list - Nothing to delete.</string>
     <string name="stray_report_image">Stray dog report image</string>
     <string name="add_stray_report">Add stray dog report</string>
     <string name="stray_reports_list">List of stray dog reports</string>
@@ -81,7 +83,7 @@
     <string name="category_food">Food</string>
     <string name="category_toys">Toys</string>
     <string name="category_equipment">Equipment</string>
-    <string name="hint_description">Description (optional)</string>
+    <string name="hint_description">Description</string>
     <string name="save">Save</string>
     <string name="category_format">Category: %1$s</string>
     <string name="menu_donations">Donations</string>

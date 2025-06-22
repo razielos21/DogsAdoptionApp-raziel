@@ -2,6 +2,7 @@ package com.example.dogsadoptionapp.ui.stray
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -15,9 +16,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-//import com.example.dogsadoptionapp.BuildConfig
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.StrayReport
 import com.example.dogsadoptionapp.databinding.FragmentReportStrayBinding
@@ -70,6 +74,8 @@ class ReportStrayFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupMenu()
+
         requestPermissionsLauncher.launch(
             arrayOf(
                 Manifest.permission.CAMERA,
@@ -104,6 +110,35 @@ class ReportStrayFragment : Fragment() {
         }
 
         getCurrentLocation()
+    }
+
+    private fun setupMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+                menu.findItem(R.id.action_delete)?.isVisible = false
+                menu.findItem(R.id.action_return)?.isVisible = true
+            }
+
+            override fun onMenuItemSelected(item: MenuItem): Boolean {
+                return when (item.itemId) {
+                    R.id.action_return -> {
+                        AlertDialog.Builder(requireContext())
+                            .setTitle(R.string.confirm_exit)
+                            .setMessage(R.string.confirm_exit_info)
+                            .setPositiveButton(R.string.yes) { _, _ ->
+                                findNavController().navigateUp()
+                            }
+                            .setNegativeButton(R.string.no, null)
+                            .setCancelable(false)
+                            .show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun launchCamera() {
