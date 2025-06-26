@@ -19,6 +19,14 @@ import com.example.dogsadoptionapp.databinding.FragmentDogFormBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
+import android.widget.ArrayAdapter
+import com.example.dogsadoptionapp.utils.Constants
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.net.URL
 
 @AndroidEntryPoint
 class DogFormFragment : Fragment() {
@@ -39,6 +47,7 @@ class DogFormFragment : Fragment() {
             }
         }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +58,7 @@ class DogFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupMenu()
+        fetchAndSetBreeds()
 
         val nameInput = binding.inputName
         val ageInput = binding.inputAge
@@ -68,7 +78,6 @@ class DogFormFragment : Fragment() {
                 dog?.let { existingDog ->
                     nameInput.setText(existingDog.name)
                     ageInput.setText(existingDog.age.toString())
-                    breedInput.setText(existingDog.breed)
                     if (existingDog.imageUri.isNotBlank()) {
                         imageUri = existingDog.imageUri.toUri()
                         imagePreview.setImageURI(imageUri)
@@ -79,7 +88,7 @@ class DogFormFragment : Fragment() {
                             val updatedDog = existingDog.copy(
                                 name = nameInput.text.toString().trim(),
                                 age = ageInput.text.toString().trim().toInt(),
-                                breed = breedInput.text.toString().trim(),
+                                breed = (breedInput.selectedItem as? String)?.trim() ?: "",
                                 imageUri = imageUri?.toString() ?: ""
                             )
                             viewModel.updateDog(updatedDog)
@@ -97,7 +106,7 @@ class DogFormFragment : Fragment() {
                         id = 0,
                         name = nameInput.text.toString().trim(),
                         age = ageInput.text.toString().trim().toInt(),
-                        breed = breedInput.text.toString().trim(),
+                        breed = (breedInput.selectedItem as? String)?.trim() ?: "",
                         imageUri = imageUri?.toString() ?: ""
                     )
                     viewModel.insertDog(newDog)
@@ -111,12 +120,10 @@ class DogFormFragment : Fragment() {
 
     private fun validateInputs(): Boolean {
         val name = binding.inputName.text.toString().trim()
-        val breed = binding.inputBreed.text.toString().trim()
         val age = binding.inputAge.text.toString().trim()
         val image = imageUri?.toString() ?: ""
 
         return name.isNotBlank()
-                && breed.isNotBlank()
                 && age.toIntOrNull()?.let { it > 0 } == true
                 && image.isNotBlank()
     }
@@ -157,6 +164,36 @@ class DogFormFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun fetchAndSetBreeds() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = URL(Constants.BASE_URL.removeSuffix("/") + "s/list/all").readText()
+                val breeds = parseBreeds(response)
+                val capitalizedBreeds = breeds.map { it.replaceFirstChar { c -> c.uppercase() } }
+                withContext(Dispatchers.Main) {
+                    val adapter = ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        capitalizedBreeds
+                    )
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.inputBreed.adapter = adapter
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun parseBreeds(json: String): List<String> {
+        val breedList = mutableListOf<String>()
+        val message = JSONObject(json).getJSONObject("message")
+        message.keys().forEach { breed ->
+            breedList.add(breed)
+        }
+        return breedList.sorted()
     }
 
 }

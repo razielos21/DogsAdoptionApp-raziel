@@ -7,11 +7,16 @@ import com.example.dogsadoptionapp.data.repository.DonationRepository
 import com.example.dogsadoptionapp.data.repository.StrayReportRepository
 import com.example.dogsadoptionapp.data.repository.AdoptionRecordRepository
 import com.example.dogsadoptionapp.data.repository.DogsRepository
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import com.example.dogsadoptionapp.utils.Constants
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -29,6 +34,16 @@ object AppModule {
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(gson: Gson) : Retrofit {
+        return Retrofit.Builder().baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson)).build()
+    }
+
+    @Provides
+    fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
     fun provideDogsDao(db: DogsDatabase): DogsDao = db.dogsDao()
