@@ -104,8 +104,56 @@
 
     <string name="menu_strays">Stray Reports</string>
     <string name="no_stray_reports">No stray dogs in the list - Nothing to delete.</string>
-
-
-
-
+    <string-array name="random_dog_names">
+        <item>Max</item>
+        <item>Bella</item>
+        <item>Charlie</item>
+        <item>Luna</item>
+        <item>Cooper</item>
+        <item>Daisy</item>
+        <item>Rocky</item>
+        <item>Sadie</item>
+        <item>Duke</item>
+        <item>Molly</item>
+        <item>Buddy</item>
+        <item>Bailey</item>
+        <item>Ruby</item>
+        <item>Milo</item>
+        <item>Zoe</item>
+        <item>Bear</item>
+        <item>Chloe</item>
+        <item>Tucker</item>
+        <item>Stella</item>
+        <item>Leo</item>
+        <item>Rosie</item>
+        <item>Finn</item>
+        <item>Lily</item>
+        <item>Scout</item>
+        <item>Olive</item>
+        <item>Jasper</item>
+        <item>Willow</item>
+        <item>Zeus</item>
+        <item>Penny</item>
+        <item>Murphy</item>
+        <item>Nala</item>
+        <item>Winston</item>
+        <item>Maple</item>
+        <item>Odin</item>
+        <item>Ginger</item>
+        <item>Thor</item>
+        <item>Abby</item>
+        <item>Hank</item>
+        <item>Roxy</item>
+        <item>Moose</item>
+        <item>Pepper</item>
+        <item>Shadow</item>
+        <item>Hazel</item>
+        <item>Diesel</item>
+        <item>Remi</item>
+        <item>Juno</item>
+        <item>Marley</item>
+        <item>Cleo</item>
+        <item>Ace</item>
+        <item>Poppy</item>
+    </string-array>
 </resources>

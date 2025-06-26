@@ -100,5 +100,57 @@
     <string name="no_donations">אין תרומות למחיקה</string>
     <string name="menu_strays">רשימת דיווחים</string>
     <string name="no_stray_reports">אין דיווחים למחיקה</string>
+    <string-array name="random_dog_names">
+        <item>מקס</item>
+        <item>בלה</item>
+        <item>צרלי</item>
+        <item>לונה</item>
+        <item>קופר</item>
+        <item>דייזי</item>
+        <item>רוקי</item>
+        <item>סיידי</item>
+        <item>דיווק</item>
+        <item>מולי</item>
+        <item>בדי</item>
+        <item>ביילי</item>
+        <item>רובי</item>
+        <item>מיילו</item>
+        <item>זואי</item>
+        <item>ביר</item>
+        <item>קלואי</item>
+        <item>טאקר</item>
+        <item>סטלה</item>
+        <item>ליאו</item>
+        <item>רוזי</item>
+        <item>פין</item>
+        <item>לילי</item>
+        <item>סקאוט</item>
+        <item>אוליב</item>
+        <item>גספר</item>
+        <item>וילואו</item>
+        <item>זאוס</item>
+        <item>פני</item>
+        <item>מרפי</item>
+        <item>נלה</item>
+        <item>ווינסטון</item>
+        <item>מייפל</item>
+        <item>אודין</item>
+        <item>גינגר</item>
+        <item>תור</item>
+        <item>אבי</item>
+        <item>הנק</item>
+        <item>רוקסי</item>
+        <item>מוס</item>
+        <item>פפר</item>
+        <item>שדו</item>
+        <item>הייזל</item>
+        <item>דיזל</item>
+        <item>רמי</item>
+        <item>יונו</item>
+        <item>מרלי</item>
+        <item>קליאו</item>
+        <item>אס</item>
+        <item>פופי</item>
+    </string-array>
 
 </resources>
