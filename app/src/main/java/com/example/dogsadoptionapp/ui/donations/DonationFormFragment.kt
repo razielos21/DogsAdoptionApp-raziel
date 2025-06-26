@@ -1,12 +1,8 @@
 package com.example.dogsadoptionapp.ui.donations
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -21,9 +17,7 @@ import com.example.dogsadoptionapp.databinding.FragmentDonationFormBinding
 import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-
+import java.util.*
 
 @AndroidEntryPoint
 class DonationFormFragment : Fragment() {
@@ -59,7 +53,7 @@ class DonationFormFragment : Fragment() {
             else -> null
         }
 
-        if (name.isEmpty() || category == null) {
+        if (name.isEmpty() || category == null || description.isEmpty()) {
             Toast.makeText(requireContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
             return
         }
@@ -79,9 +73,28 @@ class DonationFormFragment : Fragment() {
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+                menu.findItem(R.id.action_delete)?.isVisible = false
+                menu.findItem(R.id.action_return)?.isVisible = true
             }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false
+            override fun onMenuItemSelected(item: MenuItem): Boolean {
+                return when (item.itemId) {
+                    R.id.action_return -> {
+                        AlertDialog.Builder(requireContext())
+                            .setTitle(R.string.confirm_exit)
+                            .setMessage(R.string.confirm_exit_info)
+                            .setPositiveButton(R.string.yes) { _, _ ->
+                                findNavController().navigateUp()
+                            }
+                            .setNegativeButton(R.string.no, null)
+                            .setCancelable(false)
+                            .show()
+                        true
+                    }
+                    else -> false
+                }
+            }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 

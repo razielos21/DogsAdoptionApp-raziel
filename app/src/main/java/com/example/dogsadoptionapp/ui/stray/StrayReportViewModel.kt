@@ -22,6 +22,10 @@ class StrayReportViewModel @Inject constructor(
         repository.delete(report)
     }
 
+    fun deleteAllReports() = viewModelScope.launch {
+        repository.deleteAll()
+    }
+
     fun getReportById(id: Int): LiveData<StrayReport> {
         val result = MutableLiveData<StrayReport>()
         viewModelScope.launch {
@@ -30,3 +34,5 @@ class StrayReportViewModel @Inject constructor(
         return result
     }
 }
+
+

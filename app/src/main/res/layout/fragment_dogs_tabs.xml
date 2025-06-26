@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/blob_scene_haikei">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/dogsTabLayout"
@@ -12,7 +13,8 @@
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@android:color/holo_blue_dark"
         app:tabSelectedTextColor="@android:color/black"
-        app:tabTextColor="@android:color/darker_gray" />
+        app:tabTextColor="@android:color/darker_gray"
+        android:background="@color/green"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/dogsViewPager"

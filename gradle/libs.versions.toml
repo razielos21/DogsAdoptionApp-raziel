@@ -1,6 +1,6 @@
 [versions]
 agp = "8.9.1"
-kotlin = "1.9.23"
+kotlin = "2.0.20"
 room = "2.6.1"
 glide = "4.16.0"
 coreKtx = "1.16.0"
@@ -23,6 +23,9 @@ lifecycle = "2.8.6"
 playServicesLocation = "21.0.1"
 
 [libraries]
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

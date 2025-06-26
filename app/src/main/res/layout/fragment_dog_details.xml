@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:paddingTop="15dp"
-    android:background="@color/light_blue">
+    android:background="@drawable/blob_scene_haikei">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

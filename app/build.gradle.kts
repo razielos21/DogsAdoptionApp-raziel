@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.viewpager2)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.kotlin.stdlib)
 
     implementation(libs.material)
     implementation(libs.kotlinx.coroutines.android)

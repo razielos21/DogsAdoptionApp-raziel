@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/blob_scene_haikei">
 
     <TextView
         android:id="@+id/emptyText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/no_dogs_available"
-        android:textColor="@color/gray"
+        android:textColor="@color/dark_gray"
         android:gravity="center"
         android:textSize="16sp"
         android:visibility="gone"

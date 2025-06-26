@@ -18,4 +18,8 @@ interface StrayReportDao {
 
     @Delete
     suspend fun delete(report: StrayReport)
+
+    @Query("DELETE FROM stray_reports")
+    suspend fun deleteAll()
+
 }

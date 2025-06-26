@@ -22,4 +22,8 @@ class StrayReportRepository @Inject constructor(
     suspend fun delete(report: StrayReport) {
         dao.delete(report)
     }
+
+    suspend fun deleteAll() {
+        dao.deleteAll()
+    }
 }

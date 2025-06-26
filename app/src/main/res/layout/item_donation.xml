@@ -20,22 +20,22 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:text="Donor Name" />
+            android:text="@string/Donor_Name" />
 
         <TextView
             android:id="@+id/textCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue"
+            android:textColor="@color/dark_blue"
             android:layout_marginTop="4dp"
-            android:text="Category" />
+            android:text="@string/Donor_Category" />
 
         <TextView
             android:id="@+id/textDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Description" />
+            android:text="@string/Donor_Description" />
 
         <TextView
             android:id="@+id/textDate"
@@ -44,6 +44,6 @@
             android:layout_marginTop="4dp"
             android:textSize="12sp"
             android:textColor="@android:color/darker_gray"
-            android:text="2025-06-19" />
+            android:text="@string/Donor_Date" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

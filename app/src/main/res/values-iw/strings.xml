@@ -89,5 +89,16 @@
     <string name="menu_about">אודות</string>
     <string name="all_categories">הכל</string>
     <string name="about_text">האפליקציה נבנתה עבור עמותת אימוץ כלבים. ניתן לראות כלבים, לאמץ, לתרום ציוד ולעזור בדיווח על כלבים משוטטים. נבנה באהבה ע״י סטודנטים מ־HIT 🐾</string>
+    <string name="Tel_Aviv">תל אביב</string>
+    <string name="Donor_Name">שם תורם</string>
+    <string name="Donor_Category">קטגוריה</string>
+    <string name="Donor_Description">תיאור</string>
+    <string name="team_members">חברי הקבוצה</string>
+    <string name="member1_name">שירה אייל</string>
+    <string name="member2_name">רזיאל אוטיק</string>
+    <string name="member3_name">אביתר תם</string>
+    <string name="no_donations">אין תרומות למחיקה</string>
+    <string name="menu_strays">רשימת דיווחים</string>
+    <string name="no_stray_reports">אין דיווחים למחיקה</string>
 
 </resources>

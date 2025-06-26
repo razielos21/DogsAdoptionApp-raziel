@@ -5,14 +5,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
-        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimary">@color/green</item>
         <item name="android:textColor">?attr/editTextColor</item>
         <item name="materialButtonStyle">@style/App.MaterialButton</item>
         <item name="colorOnPrimary">@color/black</item>
     </style>
 
     <style name="App.MaterialButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/turquoise</item>
+        <item name="backgroundTint">@color/green</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 

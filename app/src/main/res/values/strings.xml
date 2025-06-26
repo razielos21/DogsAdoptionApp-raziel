@@ -89,4 +89,23 @@
     <string name="all_categories">All</string>
     <string name="about_text">This app was created for a dog adoption shelter. You can view dogs, adopt, donate items, and help report stray dogs. Built with love by HIT students 🐾</string>
 
+    <string name="team_members">Team Members</string>
+    <string name="member1_name">Shira Ayal</string>
+    <string name="member2_name">Raziel Otick</string>
+    <string name="member3_name">Evyatar Tam</string>
+    
+    <string name="reportDateTime" translatable="false">19/06/2025 14:00"</string>
+    <string name="Tel_Aviv">Tel Aviv</string>
+    <string name="Donor_Name">Donor Name</string>
+    <string name="Donor_Category">Category</string>
+    <string name="Donor_Description">Description</string>
+    <string name="Donor_Date" translatable="false">2025-06-19</string>
+    <string name="no_donations">No donations in the list - Nothing to delete.</string>
+
+    <string name="menu_strays">Stray Reports</string>
+    <string name="no_stray_reports">No stray dogs in the list - Nothing to delete.</string>
+
+
+
+
 </resources>
