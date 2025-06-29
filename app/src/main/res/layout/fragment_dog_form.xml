@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    android:layout_margin="20dp"
-    android:layout_gravity="center">
+    android:layout_height="match_parent"
+    android:background="@drawable/blob_scene_haikei">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Wrap all elements in a ConstraintLayout inside CardView -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
 
                 <EditText
                     android:id="@+id/inputName"
@@ -20,10 +31,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="@string/dog_name"
-                    android:textColorHint="@color/black"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    android:textColor="@color/black"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/inputAge"
@@ -33,14 +45,19 @@
                     android:hint="@string/dog_age"
                     android:inputType="number"
                     android:minHeight="48dp"
-                    android:textColorHint="@color/black"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inputName" />
 
                 <Spinner
                     android:id="@+id/inputBreed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:minHeight="48dp" />
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inputAge" />
 
                 <ImageView
                     android:id="@+id/imagePreview"
@@ -50,7 +67,9 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_launcher_background"
                     android:contentDescription="@string/dog_image"
-                    android:layout_gravity="center"/>
+                    app:layout_constraintTop_toBottomOf="@+id/inputBreed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPickImage"
@@ -62,9 +81,10 @@
                     app:icon="@drawable/baseline_add_photo_alternate_24"
                     app:iconGravity="textStart"
                     app:iconPadding="8dp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"/>
+                    app:layout_constraintTop_toBottomOf="@+id/imagePreview"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textAllCaps="false" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSubmitDog"
@@ -73,9 +93,14 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/save_dog"
                     android:contentDescription="@string/save_dog"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"/>
+                    app:layout_constraintTop_toBottomOf="@+id/btnPickImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textAllCaps="false" />
 
-    </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
