@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.URL
+import java.util.Locale
 
 @AndroidEntryPoint
 class DogsListFragment : Fragment() {
@@ -83,7 +84,7 @@ class DogsListFragment : Fragment() {
 
         binding.btnRandomFact.setOnClickListener {
             fetchRandomDogFact { fact ->
-                if (fact != null) {
+                if (fact.isNotBlank()) {
                     showRandomFactDialog(fact)
                 } else {
                     AlertDialog.Builder(requireContext())
@@ -106,8 +107,7 @@ class DogsListFragment : Fragment() {
                 val success = json.optBoolean("success", false)
                 if (success) {
                     val factsArray = json.optJSONArray("facts")
-                    factsArray?.optString(0)?.takeIf { it.isNotBlank() }
-                        ?: localFacts.random()
+                    factsArray?.optString(0)?.takeIf { it.isNotBlank() } ?: localFacts.random()
                 } else {
                     localFacts.random()
                 }
@@ -116,7 +116,6 @@ class DogsListFragment : Fragment() {
                 localFacts.random()
             }
 
-            // Translate the fact to Hebrew if the device language is Hebrew
             val finalFact = TranslationHelper.translateToHebrew(rawFact)
 
             withContext(Dispatchers.Main) {
@@ -125,6 +124,52 @@ class DogsListFragment : Fragment() {
         }
     }
 
+    private fun fetchAndAddRandomDogs(count: Int = 5) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val nameArray = resources.getStringArray(R.array.random_dog_names)
+
+            repeat(count) {
+                try {
+                    val response = URL("https://dog.ceo/api/breeds/image/random").readText()
+                    val json = JSONObject(response)
+                    val imageUrl = json.getString("message")
+                    val breed = imageUrl.split("/").getOrNull(4) ?: "Unknown"
+
+                    val gender = if ((0..1).random() == 0)
+                        if (isDeviceInHebrew()) "זכר" else "Male"
+                    else
+                        if (isDeviceInHebrew()) "נקבה" else "Female"
+
+                    val translatedBreed = if (isDeviceInHebrew())
+                        TranslationHelper.translateToHebrew(breed.replaceFirstChar { it.uppercase() })
+                    else
+                        breed
+
+                    val dog = Dog(
+                        id = 0,
+                        name = nameArray.random(),
+                        age = (0..20).random(),
+                        gender = gender,
+                        breed = translatedBreed,
+                        imageUri = imageUrl,
+                        isFavorite = false,
+                        isAdopted = false
+                    )
+
+                    withContext(Dispatchers.Main) {
+                        viewModel.insertDog(dog)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    private fun isDeviceInHebrew(): Boolean {
+        val locale = Locale.getDefault()
+        return locale.language == "he" || locale.language == "iw"
+    }
 
     private fun showRandomFactDialog(fact: String) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_random_fact, null)
@@ -152,15 +197,13 @@ class DogsListFragment : Fragment() {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.main_menu, menu)
 
+                menu.findItem(R.id.action_delete)?.isVisible = true
                 menu.findItem(R.id.action_return)?.isVisible = false
+                menu.findItem(R.id.action_refresh)?.isVisible = true
 
-                val deleteItem = menu.findItem(R.id.action_delete)
-                deleteItem?.isVisible = true
-
-                val icon = deleteItem?.icon
-                icon?.let {
+                menu.findItem(R.id.action_delete)?.icon?.let {
                     val insetIcon = InsetDrawable(it, 0, 20, 0, 0)
-                    deleteItem.icon = insetIcon
+                    menu.findItem(R.id.action_delete)?.icon = insetIcon
                 }
             }
 
@@ -184,6 +227,10 @@ class DogsListFragment : Fragment() {
                                 .setNegativeButton(android.R.string.cancel, null)
                                 .show()
                         }
+                        true
+                    }
+                    R.id.action_refresh -> {
+                        fetchAndAddRandomDogs()
                         true
                     }
                     else -> false
