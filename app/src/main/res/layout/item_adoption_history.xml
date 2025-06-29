@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,47 +12,65 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-    <ImageView
-        android:id="@+id/itemDogImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        android:layout_marginEnd="12dp"
-        tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dp"
-        tools:ignore="MissingConstraints">
+        <ImageView
+            android:id="@+id/itemDogImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/itemAdopterName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/adopter"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="14sp"
+            android:maxLength="25"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/itemDogImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/itemDogImage" />
 
         <TextView
             android:id="@+id/itemAdoptionDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="14sp" />
+            android:textSize="12sp"
+            android:maxLength="25"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/itemDogImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemAdopterName" />
 
         <TextView
             android:id="@+id/itemAdoptionPhone"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="14sp" />
+            android:textSize="12sp"
+            android:maxLength="25"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/itemDogImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemAdoptionDate" />
 
         <TextView
             android:id="@+id/itemAdoptionEmail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:textSize="12sp"
+            android:maxLength="25"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/itemDogImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemAdoptionPhone"
+            app:layout_constraintBottom_toBottomOf="@id/itemDogImage" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
