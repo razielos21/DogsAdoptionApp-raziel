@@ -104,6 +104,19 @@
 
     <string name="menu_strays">Stray Reports</string>
     <string name="no_stray_reports">No stray dogs in the list - Nothing to delete.</string>
+
+    <string name="random_fact">Random Fact</string>
+    <string name="ok">OK</string>
+    <string name="api_error_message">API error</string>
+
+    <string-array name="local_dog_facts">
+        <item>Dogs have three eyelids.</item>
+        <item>A Greyhound can beat a Cheetah in a long-distance race.</item>
+        <item>Dalmatians are born completely white.</item>
+        <item>Dogs can learn more than 1000 words.</item>
+        <item>A dog’s sense of smell is at least 40x better than ours.</item>
+    </string-array>
+
     <string-array name="random_dog_names">
         <item>Max</item>
         <item>Bella</item>
