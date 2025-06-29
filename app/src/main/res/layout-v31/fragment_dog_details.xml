@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:layout_margin="20dp"
+    android:layout_gravity="center">
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView 
+            android:id="@+id/dogDetailImage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="fitCenter"
+            android:clipToOutline="true"
+            android:contentDescription="@string/dog_image"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/dogDetailName"
+            android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/dog_name" />
+
+                <TextView
+                    android:id="@+id/dogDetailBreed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/dog_breed" />
+
+                <TextView
+                    android:id="@+id/dogDetailAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="@string/dog_age" />
+
+                <ToggleButton
+                    android:id="@+id/toggleFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOn="@string/favorite_on"
+                    android:textOff="@string/favorite_off"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="@string/tab_favorites" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAdoptDog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/adoption_process"
+                    app:cornerRadius="8dp"
+                    android:padding="12dp"
+                    android:textAllCaps="false"
+                    android:contentDescription="@string/adopt"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>

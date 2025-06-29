@@ -34,7 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="@color/dark_gray"
             android:paddingBottom="6dp"
             android:text="@string/reportDateTime" />
     </LinearLayout>

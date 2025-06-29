@@ -1,145 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:layout_margin="20dp"
+    android:layout_gravity="center">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardContainer"
+        <TextView
+            android:id="@+id/titleAdoptionProcess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_adoption_process"
+            android:textSize="28sp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/adoptionDogLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/Adopting"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/adoptionDogName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textStyle="bold"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/inputAdopterFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_marginTop="16dp"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-            <!-- Wrap all elements in a ConstraintLayout inside CardView -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp">
+        <EditText
+            android:id="@+id/inputAdopterLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
-                <TextView
-                    android:id="@+id/titleAdoptionProcess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/start_adoption_process"
-                    android:textSize="28sp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+        <EditText
+            android:id="@+id/inputAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/Address"
+            android:inputType="textPostalAddress"
+            android:minHeight="48dp" />
 
-                <TextView
-                    android:id="@+id/adoptionDogLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/Adopting"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/titleAdoptionProcess"
-                    app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/inputAdopterPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:digits="1234567890"
+            android:hint="@string/phone_number"
+            android:maxLength="10"
+            android:minHeight="48dp" />
 
-                <TextView
-                    android:id="@+id/adoptionDogName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:textStyle="bold"
-                    android:textSize="24sp"
-                    app:layout_constraintBaseline_toBaselineOf="@id/adoptionDogLabel"
-                    app:layout_constraintStart_toEndOf="@id/adoptionDogLabel" />
+        <EditText
+            android:id="@+id/inputAdopterEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
 
-                <EditText
-                    android:id="@+id/inputAdopterFirstName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="@string/first_name"
-                    android:inputType="textPersonName"
-                    app:layout_constraintTop_toBottomOf="@id/adoptionDogName"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkboxAgreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/terms" />
 
-                <EditText
-                    android:id="@+id/inputAdopterLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/last_name"
-                    android:inputType="textPersonName"
-                    app:layout_constraintTop_toBottomOf="@id/inputAdopterFirstName"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/btnAdoptConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/adopt"
+            android:padding="8dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"/>
 
-                <EditText
-                    android:id="@+id/inputAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/Address"
-                    android:inputType="textPostalAddress"
-                    app:layout_constraintTop_toBottomOf="@id/inputAdopterLastName"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
 
-                <EditText
-                    android:id="@+id/inputAdopterPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/phone_number"
-                    android:inputType="phone"
-                    android:maxLength="10"
-                    android:digits="1234567890"
-                    app:layout_constraintTop_toBottomOf="@id/inputAddress"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <EditText
-                    android:id="@+id/inputAdopterEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    app:layout_constraintTop_toBottomOf="@id/inputAdopterPhone"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/checkboxAgreement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/terms"
-                    app:layout_constraintTop_toBottomOf="@id/inputAdopterEmail"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnAdoptConfirm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/adopt"
-                    app:layout_constraintTop_toBottomOf="@id/checkboxAgreement"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:cornerRadius="8dp"
-                    android:textAllCaps="false" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.cardview.widget.CardView>

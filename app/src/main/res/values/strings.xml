@@ -81,7 +81,7 @@
     <string name="category_food">Food</string>
     <string name="category_toys">Toys</string>
     <string name="category_equipment">Equipment</string>
-    <string name="hint_description">Description (optional)</string>
+    <string name="hint_description">Description</string>
     <string name="save">Save</string>
     <string name="category_format">Category: %1$s</string>
     <string name="menu_donations">Donations</string>
@@ -104,6 +104,19 @@
 
     <string name="menu_strays">Stray Reports</string>
     <string name="no_stray_reports">No stray dogs in the list - Nothing to delete.</string>
+
+    <string name="random_fact">Random Fact</string>
+    <string name="ok">OK</string>
+    <string name="api_error_message">API error</string>
+
+    <string-array name="local_dog_facts">
+        <item>Dogs have three eyelids.</item>
+        <item>A Greyhound can beat a Cheetah in a long-distance race.</item>
+        <item>Dalmatians are born completely white.</item>
+        <item>Dogs can learn more than 1000 words.</item>
+        <item>A dog’s sense of smell is at least 40x better than ours.</item>
+    </string-array>
+
     <string-array name="random_dog_names">
         <item>Max</item>
         <item>Bella</item>

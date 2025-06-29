@@ -10,9 +10,9 @@
         android:id="@+id/dogsTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@android:color/holo_blue_dark"
+        app:tabIndicatorColor="@color/turquoise"
         app:tabSelectedTextColor="@android:color/black"
-        app:tabTextColor="@android:color/darker_gray"
+        app:tabTextColor="@color/turquoise"
         android:background="@color/green"/>
 
     <androidx.viewpager2.widget.ViewPager2

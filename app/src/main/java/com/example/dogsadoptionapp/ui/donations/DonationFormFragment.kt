@@ -76,6 +76,7 @@ class DonationFormFragment : Fragment() {
                 menuInflater.inflate(R.menu.main_menu, menu)
                 menu.findItem(R.id.action_delete)?.isVisible = false
                 menu.findItem(R.id.action_return)?.isVisible = true
+                menu.findItem(R.id.action_refresh)?.isVisible = false
             }
 
             override fun onMenuItemSelected(item: MenuItem): Boolean {

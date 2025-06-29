@@ -26,7 +26,6 @@
             android:id="@+id/textCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_blue"
             android:layout_marginTop="4dp"
             android:text="@string/Donor_Category" />
 
@@ -43,7 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textSize="12sp"
-            android:textColor="@android:color/darker_gray"
             android:text="@string/Donor_Date" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

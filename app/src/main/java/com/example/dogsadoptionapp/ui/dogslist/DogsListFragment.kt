@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -15,8 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentDogsListBinding
+import com.example.dogsadoptionapp.utils.Constants
 import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import java.net.URL
 
 @AndroidEntryPoint
 class DogsListFragment : Fragment() {
@@ -69,6 +79,67 @@ class DogsListFragment : Fragment() {
             NavHostFragment.findNavController(requireParentFragment())
                 .navigate(R.id.dogFormFragment)
         }
+
+        binding.btnRandomFact.setOnClickListener {
+            fetchRandomDogFact { fact ->
+                if (fact != null) {
+                    showRandomFactDialog(fact)
+                } else {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.alert))
+                        .setMessage(getString(R.string.api_error_message))
+                        .setPositiveButton(android.R.string.ok, null)
+                        .show()
+                }
+            }
+        }
+    }
+
+    private fun fetchRandomDogFact(onResult: (String) -> Unit) {
+        val localFacts = resources.getStringArray(R.array.local_dog_facts).toList()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val fact: String = try {
+                val response = URL(Constants.FACT_URL.removeSuffix("/") + "/facts").readText()
+                val json = JSONObject(response)
+                val success = json.optBoolean("success", false)
+                if (success) {
+                    val factsArray = json.optJSONArray("facts")
+                    factsArray?.optString(0)?.takeIf { it.isNotBlank() }
+                        ?: localFacts.random()
+                } else {
+                    localFacts.random()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                localFacts.random()
+            }
+
+            withContext(Dispatchers.Main) {
+                onResult(fact)
+            }
+        }
+    }
+
+
+    private fun showRandomFactDialog(fact: String) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_random_fact, null)
+
+        val title = dialogView.findViewById<TextView>(R.id.dialogTitle)
+        val factText = dialogView.findViewById<TextView>(R.id.factText)
+        val image = dialogView.findViewById<ImageView>(R.id.dogImage)
+        val okButton = dialogView.findViewById<Button>(R.id.okButton)
+
+        title.text = getString(R.string.random_fact)
+        factText.text = fact
+        image.setImageResource(R.drawable.dog_and_speech_bubble)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        okButton.setOnClickListener { dialog.dismiss() }
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
     }
 
     private fun setupMenu() {
@@ -128,5 +199,4 @@ class DogsListFragment : Fragment() {
             .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
-
 }

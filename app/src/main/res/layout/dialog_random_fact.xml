@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:layout_margin="20dp"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:text="@string/random_fact"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/dogImage"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
+        android:src="@drawable/dog_and_speech_bubble"
+        android:layout_gravity="center"
+        android:layout_marginVertical="16dp"/>
+
+    <TextView
+        android:id="@+id/factText"
+        android:text="..."
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp" />
+
+    <Button
+        android:id="@+id/okButton"
+        android:text="@string/ok"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textAllCaps="false"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

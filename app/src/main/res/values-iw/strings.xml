@@ -82,7 +82,7 @@
     <string name="category_food">אוכל</string>
     <string name="category_toys">צעצועים</string>
     <string name="category_equipment">ציוד</string>
-    <string name="hint_description">תיאור (לא חובה)</string>
+    <string name="hint_description">תיאור</string>
     <string name="save">שמור</string>
     <string name="category_format">קטגוריה: %1$s</string>
     <string name="menu_donations">תרומות</string>
@@ -100,6 +100,18 @@
     <string name="no_donations">אין תרומות למחיקה</string>
     <string name="menu_strays">רשימת דיווחים</string>
     <string name="no_stray_reports">אין דיווחים למחיקה</string>
+    <string name="random_fact">עובדה אקראית</string>
+    <string name="ok">אוקיי</string>
+    <string name="api_error_message">שגיאה בקריאה לשרת</string>
+    <string-array name="local_dog_facts">
+        <item>לכלבים יש שלושה עפעפיים.</item>
+        <item>גרייהאונד יכול לנצח צ׳יטה במרוץ ארוך.</item>
+        <item>דלמטיים נולדים לבנים לגמרי.</item>
+        <item>כלבים יכולים ללמוד יותר מ־1000 מילים.</item>
+        <item>חוש הריח של כלב חזק פי 40 משלנו.</item>
+    </string-array>
+
+
     <string-array name="random_dog_names">
         <item>מקס</item>
         <item>בלה</item>
