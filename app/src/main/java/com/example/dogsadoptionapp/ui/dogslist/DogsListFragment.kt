@@ -20,6 +20,7 @@ import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentDogsListBinding
 import com.example.dogsadoptionapp.utils.Constants
 import com.example.dogsadoptionapp.utils.autoCleared
+import com.example.dogsadoptionapp.utils.TranslationHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -99,7 +100,7 @@ class DogsListFragment : Fragment() {
         val localFacts = resources.getStringArray(R.array.local_dog_facts).toList()
 
         CoroutineScope(Dispatchers.IO).launch {
-            val fact: String = try {
+            val rawFact: String = try {
                 val response = URL(Constants.FACT_URL.removeSuffix("/") + "/facts").readText()
                 val json = JSONObject(response)
                 val success = json.optBoolean("success", false)
@@ -115,8 +116,11 @@ class DogsListFragment : Fragment() {
                 localFacts.random()
             }
 
+            // Translate the fact to Hebrew if the device language is Hebrew
+            val finalFact = TranslationHelper.translateToHebrew(rawFact)
+
             withContext(Dispatchers.Main) {
-                onResult(fact)
+                onResult(finalFact)
             }
         }
     }

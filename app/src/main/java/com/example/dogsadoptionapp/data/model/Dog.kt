@@ -9,6 +9,7 @@ data class Dog(
     val name: String = "",
     val age: Int = 0,
     val breed: String = "",
+    val gender: String = "",
     val imageUri: String = "",
     val isFavorite: Boolean = false,
     val isAdopted: Boolean = false

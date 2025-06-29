@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.ArrayAdapter
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -19,7 +20,6 @@ import com.example.dogsadoptionapp.databinding.FragmentDogFormBinding
 import com.example.dogsadoptionapp.ui.dogslist.DogsListViewModel
 import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import android.widget.ArrayAdapter
 import com.example.dogsadoptionapp.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +27,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.URL
+import com.example.dogsadoptionapp.utils.TranslationHelper
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import androidx.lifecycle.lifecycleScope
+import android.util.Log
+import java.util.Locale
 
 @AndroidEntryPoint
 class DogFormFragment : Fragment() {
@@ -57,6 +63,12 @@ class DogFormFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        lifecycleScope.launch {
+            Log.d("LanguageCheck", "Device language: ${Locale.getDefault().language}")
+            val translated = TranslationHelper.translateToHebrew("hello")
+            Log.d("TranslateTest", "Translated: $translated")
+        }
+
         setupMenu()
         fetchAndSetBreeds()
 
@@ -66,6 +78,7 @@ class DogFormFragment : Fragment() {
         val imagePreview = binding.imagePreview
         val btnPickImage = binding.btnPickImage
         val btnSubmit = binding.btnSubmitDog
+        val genderGroup = binding.genderGroup
 
         btnPickImage.setOnClickListener {
             imagePickerLauncher.launch(arrayOf("image/*"))
@@ -83,12 +96,19 @@ class DogFormFragment : Fragment() {
                         imagePreview.setImageURI(imageUri)
                     }
 
+                    when (existingDog.gender) {
+                        "Male" -> binding.radioMale.isChecked = true
+                        "Female" -> binding.radioFemale.isChecked = true
+                    }
+
                     btnSubmit.setOnClickListener {
                         if (validateInputs()) {
+                            val gender = getSelectedGender()
                             val updatedDog = existingDog.copy(
                                 name = nameInput.text.toString().trim(),
                                 age = ageInput.text.toString().trim().toInt(),
                                 breed = (breedInput.selectedItem as? String)?.trim() ?: "",
+                                gender = gender,
                                 imageUri = imageUri?.toString() ?: ""
                             )
                             viewModel.updateDog(updatedDog)
@@ -102,11 +122,13 @@ class DogFormFragment : Fragment() {
         } else {
             btnSubmit.setOnClickListener {
                 if (validateInputs()) {
+                    val gender = getSelectedGender()
                     val newDog = Dog(
                         id = 0,
                         name = nameInput.text.toString().trim(),
                         age = ageInput.text.toString().trim().toInt(),
                         breed = (breedInput.selectedItem as? String)?.trim() ?: "",
+                        gender = gender,
                         imageUri = imageUri?.toString() ?: ""
                     )
                     viewModel.insertDog(newDog)
@@ -118,14 +140,24 @@ class DogFormFragment : Fragment() {
         }
     }
 
+    private fun getSelectedGender(): String {
+        return when {
+            binding.radioMale.isChecked -> "Male"
+            binding.radioFemale.isChecked -> "Female"
+            else -> ""
+        }
+    }
+
     private fun validateInputs(): Boolean {
         val name = binding.inputName.text.toString().trim()
         val age = binding.inputAge.text.toString().trim()
         val image = imageUri?.toString() ?: ""
+        val gender = getSelectedGender()
 
         return name.isNotBlank()
-                && age.toIntOrNull()?.let { it > 0 } == true
+                && age.toIntOrNull()?.let { it in 0..20 } == true
                 && image.isNotBlank()
+                && gender.isNotBlank()
     }
 
     private fun showValidationError() {
@@ -143,7 +175,7 @@ class DogFormFragment : Fragment() {
                 menuInflater.inflate(R.menu.main_menu, menu)
                 menu.findItem(R.id.action_delete)?.isVisible = false
                 menu.findItem(R.id.action_return)?.isVisible = true
-                menu.findItem(R.id.action_refresh)?.isVisible = true
+                menu.findItem(R.id.action_refresh)?.isVisible = false
             }
 
             override fun onMenuItemSelected(item: MenuItem): Boolean {
@@ -172,12 +204,23 @@ class DogFormFragment : Fragment() {
             try {
                 val response = URL(Constants.BASE_URL.removeSuffix("/") + "s/list/all").readText()
                 val breeds = parseBreeds(response)
-                val capitalizedBreeds = breeds.map { it.replaceFirstChar { c -> c.uppercase() } }
+
+                val displayBreeds = if (Locale.getDefault().language in listOf("he", "iw")) {
+                    breeds.map { breed ->
+                        async {
+                            val capitalized = breed.replaceFirstChar { it.uppercase() }
+                            val translated = TranslationHelper.translateToHebrew(capitalized)
+                            if (translated.startsWithHebrew()) translated else null
+                        }
+                    }.awaitAll().filterNotNull()
+                } else {
+                    breeds.map { it.replaceFirstChar { c -> c.uppercase() } }
+                }
                 withContext(Dispatchers.Main) {
                     val adapter = ArrayAdapter(
                         requireContext(),
                         android.R.layout.simple_spinner_item,
-                        capitalizedBreeds
+                        displayBreeds
                     )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     binding.inputBreed.adapter = adapter
@@ -195,6 +238,11 @@ class DogFormFragment : Fragment() {
             breedList.add(breed)
         }
         return breedList.sorted()
+    }
+
+    private fun String.startsWithHebrew(): Boolean {
+        val c = this.firstOrNull() ?: return false
+        return c in '\u0590'..'\u05FF'
     }
 
 }

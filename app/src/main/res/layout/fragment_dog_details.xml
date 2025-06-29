@@ -48,6 +48,14 @@
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/dog_age" />
 
+        <TextView
+            android:id="@+id/dogDetailGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/dog_gender" />
+
         <ToggleButton
             android:id="@+id/toggleFavorite"
             android:layout_width="wrap_content"

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.dogsadoptionapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import com.example.dogsadoptionapp.utils.TranslationHelper
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        TranslationHelper.init(applicationContext)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

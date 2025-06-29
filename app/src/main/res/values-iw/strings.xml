@@ -9,8 +9,12 @@
     <string name="favorite_on">♥ מועדפים</string>
     <string name="favorite_off">♡ מועדפים</string>
     <string name="dog_name">שם הכלב</string>
-    <string name="dog_age">גיל הכלב</string>
+    <string name="dog_age">גיל הכלב (0-20)</string>
     <string name="dog_breed">גזע</string>
+    <string name="male">זכר</string>
+    <string name="female">נקבה</string>
+    <string name="gender_format">מין: %1$s</string>
+    <string name="dog_gender">מין הכלב</string>
     <string name="select_image">בחר תמונה</string>
     <string name="save_dog">שמור כלב</string>
     <string name="fill_all_fields">נא למלא את כל השדות.</string>

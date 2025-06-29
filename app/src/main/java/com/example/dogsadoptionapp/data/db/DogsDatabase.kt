@@ -13,7 +13,7 @@ import com.example.dogsadoptionapp.data.model.StrayReport
 
 @Database(
     entities = [Dog::class, AdoptionRecord::class, StrayReport::class, Donation::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class DogsDatabase : RoomDatabase() {
