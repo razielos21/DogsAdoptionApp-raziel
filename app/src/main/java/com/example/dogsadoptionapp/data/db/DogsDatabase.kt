@@ -2,10 +2,6 @@ package com.example.dogsadoptionapp.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.dogsadoptionapp.data.db.AdoptionRecordDao
-import com.example.dogsadoptionapp.data.db.DogsDao
-import com.example.dogsadoptionapp.data.db.DonationDao
-import com.example.dogsadoptionapp.data.db.StrayReportDao
 import com.example.dogsadoptionapp.data.model.AdoptionRecord
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.data.model.Donation
