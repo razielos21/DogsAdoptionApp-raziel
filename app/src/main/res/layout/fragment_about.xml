@@ -85,6 +85,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -94,7 +95,6 @@
                         android:src="@drawable/shira_ayal"
                         android:scaleType="centerCrop"
                         android:clipToOutline="true"
-
                         android:outlineProvider="background"
                         android:layout_marginEnd="10dp" />
 
@@ -125,12 +125,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
                         android:id="@+id/member2Image"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_launcher_background"
+                        android:src="@drawable/raziel_otick"
                         android:clipToOutline="true"
                         android:outlineProvider="background"
                         android:layout_marginEnd="10dp" />
@@ -162,13 +163,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/member3Image"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_launcher_background"
+                        android:src="@drawable/evyatar_tam"
                         android:clipToOutline="true"
                         android:outlineProvider="background"
                         android:layout_marginEnd="10dp" />

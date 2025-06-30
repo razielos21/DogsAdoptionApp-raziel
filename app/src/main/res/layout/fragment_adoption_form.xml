@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
-    android:layout_margin="20dp"
-    android:layout_gravity="center">
+    android:layout_margin="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:maxLength="10"
             android:hint="@string/first_name"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
@@ -54,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:maxLength="10"
             android:hint="@string/last_name"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
@@ -63,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:maxLength="20"
             android:hint="@string/Address"
             android:inputType="textPostalAddress"
             android:minHeight="48dp" />
@@ -83,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:maxLength="25"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:minHeight="48dp" />

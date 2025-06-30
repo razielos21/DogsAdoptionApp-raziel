@@ -28,7 +28,7 @@
     <string name="tab_history">היסטוריה</string>
     <string name="history_title">היסטוריית אימוצים</string>
     <string name="adopter">מאמץ</string>
-    <string name="adopter_format">מאמץ: %1$s %2$s</string>
+    <string name="adopter_format">מאמץ: %1$s</string>
     <string name="start_adoption_process">התחל תהליך אימוץ</string>
     <string name="Adopting">מאמצים את:</string>
     <string name="first_name">שם פרטי</string>

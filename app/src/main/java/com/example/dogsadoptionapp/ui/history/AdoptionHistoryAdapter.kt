@@ -19,9 +19,9 @@ class AdoptionHistoryAdapter :
             Glide.with(itemView.context).load(record.dogImageUri).into(binding.itemDogImage)
             binding.itemAdopterName.text = itemView.context.getString(
                 com.example.dogsadoptionapp.R.string.adopter_format,
-                record.firstName,
-                record.lastName
+                record.firstName
             )
+
             binding.itemAdoptionDate.text = record.date
             binding.itemAdoptionPhone.text = record.phone
             binding.itemAdoptionEmail.text = record.email

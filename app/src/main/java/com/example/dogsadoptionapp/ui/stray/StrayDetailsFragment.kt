@@ -14,34 +14,22 @@ import com.bumptech.glide.Glide
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentStrayDetailsBinding
 import com.example.dogsadoptionapp.utils.autoCleared
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class StrayDetailsFragment : Fragment(), OnMapReadyCallback {
+class StrayDetailsFragment : Fragment() {
 
     private var binding: FragmentStrayDetailsBinding by autoCleared()
     private val viewModel: StrayReportViewModel by viewModels()
     private val args: StrayDetailsFragmentArgs by navArgs()
-
-    private var mapView: MapView? = null
-    private var map: GoogleMap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentStrayDetailsBinding.inflate(inflater, container, false)
-        mapView = binding.detailMap
-        mapView?.onCreate(savedInstanceState)
-        mapView?.getMapAsync(this)
         return binding.root
     }
 
@@ -62,12 +50,6 @@ class StrayDetailsFragment : Fragment(), OnMapReadyCallback {
                     .format(Date(report.timestamp))
                 binding.detailDate.text = formattedDate
 
-                map?.let {
-                    val location = LatLng(report.latitude, report.longitude)
-                    it.clear()
-                    it.addMarker(MarkerOptions().position(location).title("Reported here"))
-                    it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
-                }
             } else {
                 Toast.makeText(requireContext(), "Report not found", Toast.LENGTH_SHORT).show()
             }
@@ -94,30 +76,5 @@ class StrayDetailsFragment : Fragment(), OnMapReadyCallback {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView?.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mapView?.onPause()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mapView?.onDestroy()
-
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mapView?.onLowMemory()
     }
 }
