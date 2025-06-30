@@ -44,6 +44,7 @@
                     android:layout_marginTop="8dp"
                     android:hint="@string/dog_age"
                     android:inputType="number"
+                    android:maxLength="2"
                     android:minHeight="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

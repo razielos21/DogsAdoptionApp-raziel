@@ -30,7 +30,7 @@
     <string name="adopter">מאמץ</string>
     <string name="adopter_format">מאמץ: %1$s %2$s</string>
     <string name="start_adoption_process">התחל תהליך אימוץ</string>
-    <string name="Adopting">מאמצים:</string>
+    <string name="Adopting">מאמצים את:</string>
     <string name="first_name">שם פרטי</string>
     <string name="last_name">שם משפחה</string>
     <string name="email">מייל</string>
@@ -97,6 +97,8 @@
     <string name="Donor_Name">שם תורם</string>
     <string name="Donor_Category">קטגוריה</string>
     <string name="Donor_Description">תיאור</string>
+    <string name="donation_title">תמכו בכלבים שלנו 🐾</string>
+    <string name="stray_reports_title">ראיתם כלב אבוד? ספרו לנו! 🐶</string>
     <string name="team_members">חברי הקבוצה</string>
     <string name="member1_name">שירה אייל</string>
     <string name="member2_name">רזיאל אוטיק</string>

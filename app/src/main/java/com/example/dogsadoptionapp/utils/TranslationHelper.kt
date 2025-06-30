@@ -9,6 +9,7 @@ import okhttp3.Request
 import org.json.JSONObject
 import java.net.URLEncoder
 import java.util.*
+import androidx.core.content.edit
 
 object TranslationHelper {
     private lateinit var prefs: android.content.SharedPreferences
@@ -51,7 +52,7 @@ object TranslationHelper {
                 .getString("translatedText")
 
             memoryCache[text] = translated
-            prefs.edit().putString(text, translated).apply()
+            prefs.edit() { putString(text, translated) }
 
             return@withContext translated
         } catch (e: Exception) {

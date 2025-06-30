@@ -62,7 +62,9 @@ class DonationFragment : Fragment() {
     private fun setupSpinner() {
         val categories = listOf(
             getString(R.string.all_categories),
-            "FOOD", "TOYS", "EQUIPMENT"
+            getString(R.string.category_food),
+            getString(R.string.category_toys),
+            getString(R.string.category_equipment)
         )
 
         val spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
@@ -73,9 +75,9 @@ class DonationFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selected = categories[position]
                 val category = when (selected) {
-                    "FOOD" -> DonationCategory.FOOD
-                    "TOYS" -> DonationCategory.TOYS
-                    "EQUIPMENT" -> DonationCategory.EQUIPMENT
+                    getString(R.string.category_food) -> DonationCategory.FOOD
+                    getString(R.string.category_toys) -> DonationCategory.TOYS
+                    getString(R.string.category_equipment) -> DonationCategory.EQUIPMENT
                     else -> null
                 }
                 viewModel.setCategory(category)

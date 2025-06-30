@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Donation
+import com.example.dogsadoptionapp.data.model.DonationCategory
 
 class DonationAdapter(
     private val onItemClick: (Donation) -> Unit
@@ -40,13 +41,22 @@ class DonationAdapter(
         fun bind(donation: Donation) {
             donorName.text = donation.donorName
             category.text = itemView.context.getString(
-                R.string.category_format, donation.category.name
+                R.string.category_format,
+                getTranslatedCategory(donation.category)
             )
             description.text = donation.description
             date.text = donation.date
 
             itemView.setOnClickListener {
                 onItemClick(donation)
+            }
+        }
+
+        private fun getTranslatedCategory(category: DonationCategory): String {
+            return when (category) {
+                DonationCategory.FOOD -> itemView.context.getString(R.string.category_food)
+                DonationCategory.TOYS -> itemView.context.getString(R.string.category_toys)
+                DonationCategory.EQUIPMENT -> itemView.context.getString(R.string.category_equipment)
             }
         }
     }

@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/no_dogs_available"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/black"
         android:gravity="center"
         android:textSize="16sp"
         android:visibility="gone"
@@ -27,7 +27,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        app:layout_constraintBottom_toTopOf="@id/btnAddDog"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddDog"
@@ -38,7 +39,8 @@
         app:srcCompat="@drawable/baseline_add_24"
         android:backgroundTint="@color/turquoise"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dogsRecyclerView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnRandomFact"
@@ -49,6 +51,7 @@
         app:srcCompat="@drawable/baseline_question_mark_24"
         android:backgroundTint="@color/turquoise"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dogsRecyclerView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

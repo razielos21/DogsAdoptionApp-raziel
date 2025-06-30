@@ -121,6 +121,9 @@
         <item>A dog’s sense of smell is at least 40x better than ours.</item>
     </string-array>
 
+    <string name="donation_title">Support Our Dogs 🐾</string>
+    <string name="stray_reports_title">See a Lost Dog? Let Us Know! 🐶</string>
+
     <string-array name="random_dog_names">
         <item>Max</item>
         <item>Bella</item>

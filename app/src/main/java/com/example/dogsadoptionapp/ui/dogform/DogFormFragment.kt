@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.data.model.Dog
 import com.example.dogsadoptionapp.databinding.FragmentDogFormBinding
@@ -52,7 +53,6 @@ class DogFormFragment : Fragment() {
                 imageUri = it
             }
         }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,7 +93,11 @@ class DogFormFragment : Fragment() {
                     ageInput.setText(existingDog.age.toString())
                     if (existingDog.imageUri.isNotBlank()) {
                         imageUri = existingDog.imageUri.toUri()
-                        imagePreview.setImageURI(imageUri)
+                        if (existingDog.imageUri.startsWith("http")) {
+                            Glide.with(requireContext()).load(existingDog.imageUri).into(imagePreview)
+                        } else {
+                            imagePreview.setImageURI(imageUri)
+                        }
                     }
 
                     when (existingDog.gender) {
@@ -244,5 +248,5 @@ class DogFormFragment : Fragment() {
         val c = this.firstOrNull() ?: return false
         return c in '\u0590'..'\u05FF'
     }
-
 }
+

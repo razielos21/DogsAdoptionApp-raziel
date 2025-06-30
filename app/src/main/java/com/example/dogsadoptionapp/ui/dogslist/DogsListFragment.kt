@@ -130,7 +130,7 @@ class DogsListFragment : Fragment() {
 
             repeat(count) {
                 try {
-                    val response = URL("https://dog.ceo/api/breeds/image/random").readText()
+                    val response = URL(Constants.BASE_URL.removeSuffix("/") + "s/image/random").readText()
                     val json = JSONObject(response)
                     val imageUrl = json.getString("message")
                     val breed = imageUrl.split("/").getOrNull(4) ?: "Unknown"
@@ -202,7 +202,7 @@ class DogsListFragment : Fragment() {
                 menu.findItem(R.id.action_refresh)?.isVisible = true
 
                 menu.findItem(R.id.action_delete)?.icon?.let {
-                    val insetIcon = InsetDrawable(it, 0, 20, 0, 0)
+                    val insetIcon = InsetDrawable(it, 0, 0, 0, 0)
                     menu.findItem(R.id.action_delete)?.icon = insetIcon
                 }
             }

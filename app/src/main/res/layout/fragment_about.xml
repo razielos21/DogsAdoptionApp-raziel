@@ -91,8 +91,10 @@
                         android:id="@+id/member1Image"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/ic_launcher_background"
+                        android:src="@drawable/shira_ayal"
+                        android:scaleType="centerCrop"
                         android:clipToOutline="true"
+
                         android:outlineProvider="background"
                         android:layout_marginEnd="10dp" />
 

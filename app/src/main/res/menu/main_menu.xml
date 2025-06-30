@@ -11,8 +11,8 @@
     <item
         android:id="@+id/action_refresh"
         android:title="@string/cancel"
-        android:icon="@drawable/baseline_replay_24"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/baseline_refresh_24"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_delete"
