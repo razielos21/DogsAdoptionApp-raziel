@@ -133,8 +133,8 @@ class DogsListFragment : Fragment() {
                     val response = URL(Constants.BASE_URL.removeSuffix("/") + "s/image/random").readText()
                     val json = JSONObject(response)
                     val imageUrl = json.getString("message")
-                    val breed = imageUrl.split("/").getOrNull(4) ?: "Unknown"
-
+                    val breedUrl = imageUrl.split("/").getOrNull(4) ?: "Unknown"
+                    val breed = breedUrl.replaceFirstChar { it.uppercase() }
                     val gender = if ((0..1).random() == 0)
                         if (isDeviceInHebrew()) "זכר" else "Male"
                     else
