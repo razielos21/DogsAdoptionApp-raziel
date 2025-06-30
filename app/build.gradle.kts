@@ -77,4 +77,7 @@ dependencies {
     implementation(libs.gms.location)
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.16")
+    implementation("androidx.preference:preference-ktx:1.2.1")
+
 }

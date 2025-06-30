@@ -15,6 +15,11 @@ import com.example.dogsadoptionapp.R
 import com.example.dogsadoptionapp.databinding.FragmentStrayDetailsBinding
 import com.example.dogsadoptionapp.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
+import org.osmdroid.config.Configuration
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.Marker
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,17 +29,22 @@ class StrayDetailsFragment : Fragment() {
     private var binding: FragmentStrayDetailsBinding by autoCleared()
     private val viewModel: StrayReportViewModel by viewModels()
     private val args: StrayDetailsFragmentArgs by navArgs()
+    private var map: MapView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Configuration.getInstance().load(requireContext(), androidx.preference.PreferenceManager.getDefaultSharedPreferences(requireContext()))
         binding = FragmentStrayDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupMenu()
+        map = binding.detailMap
+        map?.setTileSource(TileSourceFactory.MAPNIK)
+        map?.setMultiTouchControls(true)
 
         viewModel.getReportById(args.reportId).observe(viewLifecycleOwner) { report ->
             if (report != null) {
@@ -50,6 +60,15 @@ class StrayDetailsFragment : Fragment() {
                     .format(Date(report.timestamp))
                 binding.detailDate.text = formattedDate
 
+                val location = GeoPoint(report.latitude, report.longitude)
+                map?.controller?.setZoom(15.0)
+                map?.controller?.setCenter(location)
+
+                val marker = Marker(map)
+                marker.position = location
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                marker.title = getString(R.string.report_location)
+                map?.overlays?.add(marker)
             } else {
                 Toast.makeText(requireContext(), "Report not found", Toast.LENGTH_SHORT).show()
             }
@@ -76,5 +95,20 @@ class StrayDetailsFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        map?.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        map?.onPause()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        map?.onDetach()
     }
 }

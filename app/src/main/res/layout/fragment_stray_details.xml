@@ -42,5 +42,12 @@
             android:layout_height="wrap_content"
             android:paddingTop="8dp" />
 
+        <org.osmdroid.views.MapView
+            android:id="@+id/detailMap"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
