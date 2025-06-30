@@ -33,12 +33,6 @@ class DonationViewModel @Inject constructor(
         }
     }
 
-    fun deleteDonation(donation: Donation) {
-        viewModelScope.launch {
-            repository.deleteDonation(donation)
-        }
-    }
-
     fun deleteAll() {
         viewModelScope.launch {
             repository.deleteAllDonations()

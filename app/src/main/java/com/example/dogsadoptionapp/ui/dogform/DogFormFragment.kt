@@ -78,7 +78,6 @@ class DogFormFragment : Fragment() {
         val imagePreview = binding.imagePreview
         val btnPickImage = binding.btnPickImage
         val btnSubmit = binding.btnSubmitDog
-        val genderGroup = binding.genderGroup
 
         btnPickImage.setOnClickListener {
             imagePickerLauncher.launch(arrayOf("image/*"))
@@ -249,4 +248,3 @@ class DogFormFragment : Fragment() {
         return c in '\u0590'..'\u05FF'
     }
 }
-
