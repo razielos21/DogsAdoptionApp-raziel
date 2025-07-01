@@ -163,7 +163,10 @@ class ReportStrayFragment : Fragment() {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
         ) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            fusedLocationClient.getCurrentLocation(
+                com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY,
+                null
+            ).addOnSuccessListener { location ->
                 if (location != null) {
                     currentLatitude = location.latitude
                     currentLongitude = location.longitude
@@ -193,7 +196,8 @@ class ReportStrayFragment : Fragment() {
                             binding.editLocation.setText(addressList[0].getAddressLine(0))
                         }
                     }
-
+                } else {
+                    Toast.makeText(context, "Location unavailable", Toast.LENGTH_SHORT).show()
                 }
             }.addOnFailureListener {
                 Toast.makeText(context, "Failed to get location", Toast.LENGTH_SHORT).show()
