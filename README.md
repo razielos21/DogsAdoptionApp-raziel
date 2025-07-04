@@ -44,7 +44,7 @@ An Android application for browsing and adopting dogs. Built with Kotlin, Jetpac
 - `app/src/main/java/` — Source code
 - `app/src/main/res/` — Resources (layouts, drawables, etc.)
 - `app/src/main/AndroidManifest.xml` — Manifest
-- 
+  
 ## Demo
 
 [Watch the Demo](https://youtube.com/shorts/i4Ax-aku-nQ)
