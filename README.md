@@ -33,7 +33,7 @@ An Android application for browsing and adopting dogs. Built with Kotlin, Jetpac
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/DogsAdoptionApp-raziel.git
+    git clone https://github.com/yourusername/BarkBuddy-raziel.git
     ```
 2. Open the project in Android Studio.
 3. Let Gradle sync and download dependencies.
